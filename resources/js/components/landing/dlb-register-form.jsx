@@ -5,7 +5,8 @@ const DLBRegisterForm = () => {
     return (
         <div className="flex flex-col lg:flex-row lg:items-stretch lg:min-h-screen bg-white overflow-hidden">
             {/* Left: Image */}            {/* Left: Image */}
-            <div className="relative w-full h-150 sm:h-96 lg:order-1 lg:h-auto lg:w-5/12 flex-shrink-0 overflow-hidden lg:sticky lg:top-0 pointer-events-none">                <div className="absolute inset-0">
+            <div className="relative w-full h-150 sm:h-96 lg:order-1 lg:h-auto lg:w-5/12 flex-shrink-0 overflow-hidden lg:sticky lg:top-0 pointer-events-none">                
+            <div className="absolute inset-0">
                     <img
                         className="object-cover w-full h-full scale-150 md:scale-125 lg:scale-100 transition-transform duration-500"
                         src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/3/man-working-on-laptop.jpg"
@@ -35,7 +36,7 @@ const DLBRegisterForm = () => {
                 </div>
             </div>
             {/* Right: Step Form */}
-            <div className="relative pointer-events-auto flex-1 flex items-center justify-center w-full lg:w-7/12 h-auto lg:h-screen overflow-y-auto py-10 px-6 sm:px-10 lg:py-24 md:mt-24">
+            <div className="relative pointer-events-auto flex-1 flex items-center justify-center w-full lg:w-7/12 h-auto lg:h-screen py-10 px-6 sm:px-10 lg:py-24 md:mt-24">
             <RegisterStepForm />
             </div>
         </div>
