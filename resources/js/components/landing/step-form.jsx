@@ -58,6 +58,7 @@ export default function RegisterStepForm () {
         post(route('submit-register-dlb'), {
             onFinish: () => setSubmitting(false),
             onSuccess: () => {
+
                 reset();
                 alert('Registration submitted!');
             },
@@ -79,11 +80,12 @@ export default function RegisterStepForm () {
 
     return (
         <>
-            <div className="relative max-w-xl w-full text-center lg:text-left">
+            <div className="relative max-w-xl w-full mt-10 text-center lg:text-left overflow-auto max-h-screen px-4">
+
                 {/* Step Form */}
                 <div className="border-b p-6">
                     <div className="relative mb-2">
-                        <div className="absolute top-1/2 left-0 h-0.5 w-full -translate-y-1/2 bg-gray-200"></div>
+                        <div className="absolute  top-1/2 left-0 h-0.5 w-full -translate-y-1/2 bg-gray-200"></div>
                         <div
                             className="absolute top-1/2 left-0 h-0.5 -translate-y-1/2 bg-blue-600 transition-all duration-500"
                             style={{ width: `${(step / (steps.length - 1)) * 100}%` }}
@@ -110,7 +112,7 @@ export default function RegisterStepForm () {
                     </div>
                 </div>
 
-                <div className="mt-8 bg-white rounded-xl p-6 shadow-md sm:p-8">
+                <div className="bg-white rounded-xl mt-10 p-6 border-t border-gray-200  shadow-md sm:p-8">
                     <h2 className="text-2xl font-semibold text-blue-900 mb-6">Register for the Next Cohort</h2>
                     <form onSubmit={handleNext}>
                         {renderStep()}
@@ -143,14 +145,14 @@ export default function RegisterStepForm () {
             </div>
 
             {/* Decorative Images */}
-            <div className="hidden lg:block absolute bottom-0 right-0">
+            <div className="hidden lg:block absolute bottom-0 right-0 pointer-events-none">
                 <img
                     className="object-contain w-auto h-48"
                     src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/3/curved-lines.png"
-                    alt=""
+                    alt="A young man"
                 />
             </div>
-            <div className="hidden lg:block absolute right-0 z-10 -bottom-16 lg:top-24 lg:-left-20">
+            <div className="hidden lg:block absolute right-0 z-10 -bottom-16 lg:top-24 lg:-left-20 pointer-events-none">
                 <img
                     className="w-32 h-32 md:w-40 md:h-40"
                     src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/3/circular-text.png"
