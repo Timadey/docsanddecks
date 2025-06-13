@@ -17,7 +17,7 @@ export default function Motivation({ formData, onChange, errors }) {
                     onChange={onChange}
                 />
                 {errors?.motivation && <div className="text-red-500 text-xs mt-1">{errors.motivation}</div>}
-                <small className="text-sm text-blue-400"> We want to know what your motivation and drive is, regarding this training, why are you here and what do you hope to gain? briefly.</small>
+                <small className="text-sm text-blue-400"> Briefly, we want to know what your motivation and drive is, regarding this training, why are you here and what do you hope to gain?</small>
             </div>
             <div className="mb-5">
                 <label htmlFor="hear-source" className="block text-blue-900 font-medium mb-2">

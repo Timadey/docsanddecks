@@ -74,6 +74,52 @@ export default function BackgroundForm({ formData, onChange, errors }) {
                 {errors?.msword_level && <div className="text-red-500 text-xs mt-1">{errors.msword_level}</div>}
             </div>
             <div className="mb-5">
+                <label htmlFor="msword-level" className="block text-blue-900 font-medium mb-2">
+                    Rate your skill level in Microsoft Word
+                </label>
+                <select
+                    id="msexcel-level"
+                    name="msexcel_level"
+                    className="block w-full px-4 py-3 text-base text-blue-900 placeholder-blue-400 border
+                                border-blue-200 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    required
+                    value={formData.msexcel_level || ''}
+                    onChange={onChange}
+                >
+                    <option value="" disabled>Select skill level</option>
+                    {skillLevels.map((value, index) => (
+                        <option key={index} value={value}>
+                            {value === 1 ? 'Zero Knowledge' : value === 2 ? 'Beginner' : value === 3 ? 'Intermediate'
+                                : 'Expert'}
+                        </option>
+                    ))}
+                </select>
+                {errors?.msexcel_level && <div className="text-red-500 text-xs mt-1">{errors.msexcel_level}</div>}
+            </div>
+            <div className="mb-5">
+                <label htmlFor="mspptx-level" className="block text-blue-900 font-medium mb-2">
+                    Rate your skill level in Microsoft Word
+                </label>
+                <select
+                    id="mspptx-level"
+                    name="mspptx_level"
+                    className="block w-full px-4 py-3 text-base text-blue-900 placeholder-blue-400 border
+                                border-blue-200 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    required
+                    value={formData.mspptx_level || ''}
+                    onChange={onChange}
+                >
+                    <option value="" disabled>Select skill level</option>
+                    {skillLevels.map((value, index) => (
+                        <option key={index} value={value}>
+                            {value === 1 ? 'Zero Knowledge' : value === 2 ? 'Beginner' : value === 3 ? 'Intermediate'
+                                : 'Expert'}
+                        </option>
+                    ))}
+                </select>
+                {errors?.mspptx_level && <div className="text-red-500 text-xs mt-1">{errors.mspptx_level}</div>}
+            </div>
+            <div className="mb-5">
                 <label htmlFor="education" className="block text-blue-900 font-medium mb-2">
                     Education Status
                 </label>

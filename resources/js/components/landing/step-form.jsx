@@ -23,6 +23,8 @@ export default function RegisterStepForm () {
         phone: '',
         age_group: '',
         msword_level: '',
+        msexcel_level: '',
+        mspptx_level: '',
         education: '',
         occupation: '',
         motivation: '',
@@ -53,7 +55,7 @@ export default function RegisterStepForm () {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSubmitting(true);
-        post('/register', {
+        post(route('submit-register-dlb'), {
             onFinish: () => setSubmitting(false),
             onSuccess: () => {
                 reset();

@@ -1,6 +1,6 @@
 import dndlogo from "@/assets/images/dnd-logo-no-bg.avif";
-                    import React, { useState } from 'react';
-                    import { Link } from '@inertiajs/react';
+import React, { useState } from 'react';
+import { Link } from '@inertiajs/react';
 
 export default function Header () {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -37,7 +37,7 @@ export default function Header () {
                     <div className="hidden ml-auto lg:flex lg:items-center lg:justify-center lg:space-x-10">
                         <Link href={route('home')} title="" className="text-base font-semibold text-blue-900 transition-all duration-200 hover:text-opacity-80"> Home </Link>
                         <Link href={route('register-dlb')} title="" className="text-base font-semibold text-blue-900 transition-all duration-200 hover:text-opacity-80"> Register </Link>
-                        <a href="#" title="" className="text-base font-semibold text-blue-900 transition-all duration-200 hover:text-opacity-80"> Payment </a>
+                        <Link href={route('payment')} title="" className="text-base font-semibold text-blue-900 transition-all duration-200 hover:text-opacity-80"> Payment </Link>
                         <a href="#" title="" className="text-base font-semibold text-blue-900 transition-all duration-200 hover:text-opacity-80"> Ambassadors </a>
                         <a href="#" title="" className="text-base font-semibold text-blue-900 transition-all duration-200 hover:text-opacity-80"> Contact us </a>
                         <Link href={route('register-dlb')} title="" className="inline-flex items-center justify-center px-5 py-2.5 text-base font-semibold transition-all duration-200 rounded-full bg-blue-600 text-white hover:bg-blue-700 focus:bg-blue-700" role="button">

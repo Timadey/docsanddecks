@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'dnd' => [
+        'api_url' => env('DND_API_URL', ''),
+    ]
+
 ];
