@@ -31,26 +31,7 @@ export default function PersonalForm({ formData, onChange, errors }) {
                     type="text"
                     id="firstname"
                     name="firstname"
-                    className="block w-full px-4 py-3 text-base text-blue-900 placeholder-blue-400 border border-blue-200 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
-                    placeholder="Enter your first name"
-                    required
-                    value={formData.firstname || ''}
-                    onChange={onChange}
-                    onKeyDown={(e) => handleKeyDown(e, lastnameRef)}
-                />
-                {errors?.firstname && <div className="text-red-500 text-xs mt-1">{errors.firstname}</div>}
-            </div>
-            
-        <div className="mb-5">
-                <label htmlFor="firstname" className="block text-blue-900 font-medium mb-2">
-                    First Name
-                </label>
-                <input
-                    ref={firstnameRef}
-                    type="text"
-                    id="firstname"
-                    name="firstname"
-                    className="block w-full px-4 py-3 text-base text-blue-900 placeholder-blue-400 border border-blue-200 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="border-2 border-blue-200 rounded-lg px-3 py-2 w-full text-blue-700 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-blue-50/50 placeholder-blue-300"
                     placeholder="Enter your first name"
                     required
                     value={formData.firstname || ''}
@@ -68,7 +49,7 @@ export default function PersonalForm({ formData, onChange, errors }) {
                     type="text"
                     id="lastname"
                     name="lastname"
-                    className="block w-full px-4 py-3 text-base text-blue-900 placeholder-blue-400 border border-blue-200 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="border-2 border-blue-200 rounded-lg px-3 py-2 w-full text-blue-700 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-blue-50/50 placeholder-blue-300"
                     placeholder="Enter your last name"
                     required
                     value={formData.lastname || ''}
@@ -87,7 +68,7 @@ export default function PersonalForm({ formData, onChange, errors }) {
                     type="text"
                     id="middlename"
                     name="middlename"
-                    className="block w-full px-4 py-3 text-base text-blue-900 placeholder-blue-400 border border-blue-200 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="border-2 border-blue-200 rounded-lg px-3 py-2 w-full text-blue-700 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-blue-50/50 placeholder-blue-300"
                     placeholder="Enter your middle name"
                     value={formData.middlename || ''}
                     onChange={onChange}
@@ -104,7 +85,7 @@ export default function PersonalForm({ formData, onChange, errors }) {
                     ref={genderRef}
                     id="gender"
                     name="gender"
-                    className="block w-full px-4 py-3 text-base text-blue-900 placeholder-blue-400 border border-blue-200 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="border-2 border-blue-200 rounded-lg px-3 py-2 w-full text-blue-700 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-blue-50/50 placeholder-blue-300"
                     value={formData.gender || ''}
                     onChange={onChange}
                     onKeyDown={(e) => handleKeyDown(e, emailRef)}
@@ -129,7 +110,7 @@ export default function PersonalForm({ formData, onChange, errors }) {
                     type="email"
                     id="email"
                     name="email"
-                    className="block w-full px-4 py-3 text-base text-blue-900 placeholder-blue-400 border border-blue-200 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="border-2 border-blue-200 rounded-lg px-3 py-2 w-full text-blue-700 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-blue-50/50 placeholder-blue-300"
                     placeholder="Enter your email"
                     value={formData.email || ''}
                     onChange={onChange}
@@ -148,7 +129,7 @@ export default function PersonalForm({ formData, onChange, errors }) {
                     type="tel"
                     id="phone"
                     name="phone"
-                    className="block w-full px-4 py-3 text-base text-blue-900 placeholder-blue-400 border border-blue-200 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="border-2 border-blue-200 rounded-lg px-3 py-2 w-full text-blue-700 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-blue-50/50 placeholder-blue-300"
                     placeholder="Enter your phone number"
                     value={formData.phone || ''}
                     onChange={onChange}
@@ -158,7 +139,7 @@ export default function PersonalForm({ formData, onChange, errors }) {
                 {errors?.phone && <div className="text-red-500 text-xs mt-1">{errors.phone}</div>}
             </div>
 
-           
+
         </>
     );
 }

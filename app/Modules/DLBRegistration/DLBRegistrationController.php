@@ -4,10 +4,17 @@ namespace App\Modules\DLBRegistration;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\ProfileUpdateRequest;
+use App\Mail\PaymentSuccessMail;
+use App\Models\User;
+use App\Modules\payment\Payment;
+use App\Modules\SquadMember\SquadMember;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -26,27 +33,9 @@ class DLBRegistrationController extends Controller
             'firstname'      => 'required|string|max:255',
             'lastname'       => 'required|string|max:255',
             'middlename'     => 'nullable|string|max:255',
-            'gender'         => 'required|string|in:male,female,other',
-            'email'          => [
-                'required',
-                'email',
-                'max:255',
-                function ($attribute, $value, $fail) {
-                    if ($this->gsheet->existsInGoogleSheet('email', $value, 'registration')) {
-                        $fail('The email has already been registered.');
-                    }
-                },
-            ],
-            'phone'          => [
-                'required',
-                'string',
-                'max:15',
-                function ($attribute, $value, $fail) {
-                    if ($this->gsheet->existsInGoogleSheet('phone', $value, 'registration')) {
-                        $fail('The phone number has already been registered.');
-                    }
-                },
-            ],
+            'gender'         => 'required|string|in:male,female',
+            'email'          => 'required|email|max:255|unique:dlb_registration,email',
+            'phone'          => 'required|string|max:15|unique:dlb_registration,phone',
             'age_group'      => 'required|string|max:50',
             'msword_level'   => 'required|string|max:50',
             'msexcel_level'  => 'required|string|max:50',
@@ -55,13 +44,128 @@ class DLBRegistrationController extends Controller
             'occupation'     => 'required|string|max:255',
             'motivation'     => 'required|string|max:1000',
             'hear_source'    => 'required|string|max:100',
-            'referral'       => 'nullable|string|max:100',
-            'will_commit'    => 'required|in:0,1',
+            'referral'       => 'nullable|string|max:100|exists:squad_member,referral_code',
+            'will_commit'    => 'required|boolean',
         ]);
 
-        $this->gsheet->appendToGoogleSheet($validated);
+        $user = User::firstOrCreate(
+            [
+                'email' => $validated['email'],
+            ],
+            [
+                'firstname' => $validated['firstname'],
+                'lastname' => $validated['lastname'],
+                'middlename' => $validated['middlename'] ?? null,
+                'gender' => $validated['gender'],
+                'phone' => $validated['phone'],
+                'password' => bcrypt('password'),
+            ]
+        );
 
-        return redirect()->route('payment', ['email' => $request->email])
+        $user->dlbRegistration()->create($validated);
+
+        return redirect()->route('payment', ['email' => $user->email, 'code'=>$request->referral])
             ->with('success', 'Registration done successfully, proceed to payment.');
     }
+
+    public function getUserByEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+        $user = User::with(['dlbRegistration.referredBy'])->where('email', $request->input('email'))->first();
+        if ($user && $user->dlbRegistration) {
+            //dd($user);
+            $payment = $user->dlbRegistration->payment;
+            return response()->json([
+                'success'=> true,
+                'name' => $user->firstname,
+                'user' => [
+                    'firstname' => $user->firstname,
+                    'lastname' => $user->lastname,
+                    'email' => $user->email,
+                    'phone' => $user->phone,
+                    'registration_id' => $user->dlbRegistration->id,
+                    'payment_success' => $payment
+                        && $payment->amount_charged == $payment->amount_paid
+                        && $payment->status == 'success',
+                ],
+                'referral' => [
+                    'code' => $user->dlbRegistration->referredBy?->referral_code,
+                    'name' => $user->dlbRegistration->referredBy?->user->firstname,
+                ] ]);
+        }
+        return response()->json(['success'=> false,'error' => 'No participant found with that email.']);
+    }
+
+    // Validate referral code (for referral code check on payment page)
+    public function validateReferral(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|string'
+        ]);
+
+        $referral = SquadMember::where('referral_code', $request->input('code'))->first();
+
+        if ($referral) {
+            return response()->json([
+                'valid' => true,
+                'referrer' => $referral->user->firstname,
+                'code' => $referral->referral_code,
+            ]);
+        }
+
+        return response()->json([
+            'valid' => false,
+            'referrer' => ''
+        ]);
+    }
+
+    public function validatePayment(Request $request)
+    {
+       $request->validate([
+           'reference' => 'required|string',
+       ]);
+
+       $sKey = config('services.paystack.s_key');
+       $reference = $request->reference;
+       //dd($request->reference);
+       $response = Http::withHeaders([
+           'Authorization' => "Bearer {$sKey}",
+           'Cache-Control' => 'no-cache',
+       ])->get("https://api.paystack.co/transaction/verify/{$reference}");
+
+       if ($response->failed()) {
+           logger()->info("Could not validate payment for reference: {$reference}");
+           logger()->debug($response->body());
+           return response()->json(['success' => false, 'error' => $response->body()], 500);
+       }
+       $resp = $response->json();
+       if ($resp['status'] && isset($resp['data'])) {
+           $data = $resp['data'];
+           if ($data['status'] == 'success') {
+               $customerEmail = $data['customer']['email'];
+               $user = User::where('email', $customerEmail)->first();
+               if ($user && $user->dlbRegistration) {
+                   $payment = $user->dlbRegistration->payment()->create([
+                       'user_id' => $user->id,
+                       'reference' => $data['reference'],
+                       'amount_charged' => $data['requested_amount'] / 100,
+                       'amount_paid' => $data['amount'] / 100,
+                       'currency' => $data['currency'],
+                       'status' => strtolower($data['status']),
+                       'payment_method' => $data['channel'],
+                       'provider' => 'PAYSTACK',
+                       'paid_at' => Carbon::parse($data['paid_at'])->toDateTimeString(),
+                   ]);
+
+               // Send payment success email
+                   Mail::to($customerEmail)->send(new PaymentSuccessMail($user, $payment));
+               }
+           }
+       }
+       return response($response->body(), 200)
+           ->header('Content-Type', 'application/json');
+    }
+
 }

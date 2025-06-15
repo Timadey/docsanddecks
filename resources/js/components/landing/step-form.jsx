@@ -60,7 +60,7 @@ export default function RegisterStepForm () {
             onSuccess: () => {
 
                 reset();
-                alert('Registration submitted!');
+                alert('Registration submitted! Proceed to payment');
             },
         });
     };
@@ -83,7 +83,7 @@ export default function RegisterStepForm () {
             <div className="relative max-w-xl w-full mt-10 text-center lg:text-left overflow-auto max-h-screen px-4">
 
                 {/* Step Form */}
-                <div className="border-b p-6">
+                <div className="border-b p-6 border-blue-300">
                     <div className="relative mb-2">
                         <div className="absolute  top-1/2 left-0 h-0.5 w-full -translate-y-1/2 bg-gray-200"></div>
                         <div

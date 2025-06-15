@@ -21,7 +21,7 @@ export default function Footer() {
                             </a>
                         </div>
                         <p className="mt-5 text-sm text-blue-700">
-                            Join DND Ambassadors and start earning on every participant you bring to Docs and Decks.<br />
+                            Join DnD Squad and start earning rewards on every participant you bring to Docs and Decks.<br />
                             © {new Date().getFullYear()} Docs and Decks. All rights reserved.
                         </p>
                     </div>
