@@ -32,7 +32,7 @@
                 <tr>
                     <td style="padding: 48px 36px 36px; background: #ffffff;">
                         <p style="font-size: 16px; color: #0f172a; margin-bottom: 12px;">
-                            Hello <strong>{{ $user->name }}</strong>,
+                            Hello <strong>{{ $user->firstname }}</strong>,
                         </p>
                         <p style="font-size: 15px; color: #475569; margin-bottom: 24px;">
                             Your payment has been successfully received. Welcome to the <strong style="color: #3b82f6;">Docs and Decks</strong> community! Join the WhatsApp group below.
@@ -45,7 +45,7 @@
                             </tr>
                             <tr style="background-color: #f0fdfa; border-bottom: 1px solid #e2e8f0;">
                                 <td style="padding: 16px; color: #64748b;">Amount Paid</td>
-                                <td style="padding: 16px; color: #0f766e; font-weight: 600; text-align: right;">₦{{ number_format($payment->amount_paid / 100, 2) }}</td>
+                                <td style="padding: 16px; color: #0f766e; font-weight: 600; text-align: right;">₦{{ number_format($payment->amount_paid, 2) }}</td>
                             </tr>
                             <tr>
                                 <td style="padding: 16px; color: #64748b;">Payment Method</td>
