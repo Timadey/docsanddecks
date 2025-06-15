@@ -35,4 +35,13 @@ return [
         ],
     ],
 
+    'paystack' => [
+        'p_key' => env('PAYSTACK_PUBLIC_KEY'),
+        's_key' => env('PAYSTACK_SECRET_KEY'),
+    ],
+
+    'dnd' => [
+        'api_url' => env('DND_API_URL', ''),
+    ]
+
 ];

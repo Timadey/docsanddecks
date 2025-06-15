@@ -11,13 +11,13 @@ export default function Motivation({ formData, onChange, errors }) {
                     rows="4"
                     id="motivation"
                     name="motivation"
-                    className="block w-full px-4 py-3 text-base text-blue-900 placeholder-blue-400 border border-blue-200 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="border-2 border-blue-200 rounded-lg px-3 py-2 w-full text-blue-700 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-blue-50/50 placeholder-blue-300"
                     required
                     value={formData.motivation || ''}
                     onChange={onChange}
                 />
                 {errors?.motivation && <div className="text-red-500 text-xs mt-1">{errors.motivation}</div>}
-                <small className="text-sm text-blue-400"> We want to know what your motivation and drive is, regarding this training, why are you here and what do you hope to gain? briefly.</small>
+                <small className="text-sm text-blue-400"> Briefly, we want to know what your motivation and drive is, regarding this training, why are you here and what do you hope to gain?</small>
             </div>
             <div className="mb-5">
                 <label htmlFor="hear-source" className="block text-blue-900 font-medium mb-2">
@@ -26,7 +26,7 @@ export default function Motivation({ formData, onChange, errors }) {
                 <select
                     id="hear-source"
                     name="hear_source"
-                    className="block w-full px-4 py-3 text-base text-blue-900 placeholder-blue-400 border border-blue-200 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="border-2 border-blue-200 rounded-lg px-3 py-2 w-full text-blue-700 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-blue-50/50 placeholder-blue-300"
                     required
                     value={formData.hear_source || ''}
                     onChange={onChange}
@@ -46,20 +46,19 @@ export default function Motivation({ formData, onChange, errors }) {
             </div>
             <div className="mb-6">
                 <label htmlFor="referral" className="block text-blue-900 font-medium mb-2">
-                    Enter your referral code
+                    Enter your referral code (case-sensitive)
                 </label>
                 <input
                     type="text"
                     id="referral"
                     name="referral"
-                    className="block w-full px-4 py-3 text-base text-blue-900 placeholder-blue-400 border border-blue-200 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
-                    placeholder="Enter your referral code"
-                    required
+                    className="border-2 border-blue-200 rounded-lg px-3 py-2 w-full text-blue-700 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-blue-50/50 placeholder-blue-300"
+                    placeholder="Enter your referral code (optional)"
                     value={formData.referral || ''}
                     onChange={onChange}
                 />
                 {errors?.referral && <div className="text-red-500 text-xs mt-1">{errors.referral}</div>}
-                <small className="text-sm font-bold text-blue-400"> Get extra 5% OFF all trainings when you register with a referral code </small>
+                <small className="text-sm font-bold text-blue-400">Get extra 5% OFF all trainings when you register with a referral code </small>
             </div>
             <div className="mb-5">
                 <label htmlFor="will-commit" className="block text-blue-900 font-medium mb-2">
@@ -68,7 +67,7 @@ export default function Motivation({ formData, onChange, errors }) {
                 <select
                     id="will-commit"
                     name="will_commit"
-                    className="block w-full px-4 py-3 text-base text-blue-900 placeholder-blue-400 border border-blue-200 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                    className="border-2 border-blue-200 rounded-lg px-3 py-2 w-full text-blue-700 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-blue-50/50 placeholder-blue-300"
                     required
                     value={formData.will_commit || ''}
                     onChange={onChange}

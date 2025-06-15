@@ -9,6 +9,7 @@ import CallToAction from '../components/landing/call-to-action.jsx';
 import Faq from '../components/landing/faq.jsx';
 import Footer from '../components/landing/footer.jsx';
 import Header from '../components/landing/header.jsx';
+import WhyUs from '../components/landing/why-us.jsx';
 
 export default function Welcome() {
     const { auth } = usePage().props;
@@ -24,6 +25,7 @@ export default function Welcome() {
             <IsThisForMe />
             <WhatYouWillGain />
             <TrainingOutline />
+            <WhyUs />
             <Testimonials />
             <OurNumbers />
             <Faq />
