@@ -106,9 +106,9 @@ const PaymentDetail = ({userName, userPaying, referrer, paid}) => {
                             </div>
                         ) : (
                             <>
-                                            <span className={`text-5xl font-extrabold ${hasDiscount ? 'text-green-600' : 'text-blue-700'} drop-shadow`}>
-                                                ₦{hasDiscount ? discountedAmount.toLocaleString() : BASE_AMOUNT.toLocaleString()}
-                                            </span>
+                                <span className={`text-5xl font-extrabold ${hasDiscount ? 'text-green-600' : 'text-blue-700'} drop-shadow`}>
+                                    ₦{hasDiscount ? discountedAmount.toLocaleString() : BASE_AMOUNT.toLocaleString()}
+                                </span>
                                 {hasDiscount && (
                                     <div className="mt-2 text-green-700 font-semibold text-lg">
                                         20% discount applied!
@@ -148,12 +148,12 @@ const PaymentDetail = ({userName, userPaying, referrer, paid}) => {
                                     >
                                         {loading ? (
                                             <span>
-                                                            <svg className="mr-2 inline h-4 w-4 animate-spin text-white" fill="none" viewBox="0 0 24 24">
-                                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-                                                            </svg>
-                                                            👀
-                                                        </span>
+                                                <svg className="mr-2 inline h-4 w-4 animate-spin text-white" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                                                </svg>
+                                                👀
+                                            </span>
                                         ) : (
                                             'Apply'
                                         )}
