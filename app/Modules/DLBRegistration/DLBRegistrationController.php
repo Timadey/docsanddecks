@@ -3,20 +3,13 @@
 namespace App\Modules\DLBRegistration;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Settings\ProfileUpdateRequest;
 use App\Mail\PaymentSuccessMail;
 use App\Models\User;
-use App\Modules\payment\Payment;
 use App\Modules\SquadMember\SquadMember;
 use Carbon\Carbon;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
-use Inertia\Inertia;
-use Inertia\Response;
 
 class DLBRegistrationController extends Controller
 {
@@ -47,6 +40,7 @@ class DLBRegistrationController extends Controller
             'referral'       => 'nullable|string|max:100|exists:squad_member,referral_code',
             'will_commit'    => 'required|boolean',
         ]);
+        logger()->info("New user submit registration", ['data' => $request->all(), 'ip' => $request->ip()]);
 
         $user = User::firstOrCreate(
             [
@@ -61,10 +55,12 @@ class DLBRegistrationController extends Controller
                 'password' => bcrypt('password'),
             ]
         );
+        logger()->info("User created or found", ['user' => $user->toArray()]);
 
+        logger()->info("Creating DLB registration for user", ['user_id' => $user->id, 'validated' => $validated]);
         $user->dlbRegistration()->create($validated);
 
-        return redirect()->route('payment', ['email' => $user->email, 'code'=>$request->referral])
+        return redirect()->route('payment', ['email' => $user->email])
             ->with('success', 'Registration done successfully, proceed to payment.');
     }
 
@@ -73,6 +69,7 @@ class DLBRegistrationController extends Controller
         $request->validate([
             'email' => 'required|email'
         ]);
+        logger()->info("Fetching user by email", ['email' => $request->input('email')]);
         $user = User::with(['dlbRegistration.referredBy'])->where('email', $request->input('email'))->first();
         if ($user && $user->dlbRegistration) {
             //dd($user);
@@ -104,7 +101,7 @@ class DLBRegistrationController extends Controller
         $request->validate([
             'code' => 'required|string'
         ]);
-
+        logger()->info("Validating referral code", ['code' => $request->input('code')]);
         $referral = SquadMember::where('referral_code', $request->input('code'))->first();
 
         if ($referral) {
@@ -141,12 +138,15 @@ class DLBRegistrationController extends Controller
            return response()->json(['success' => false, 'error' => $response->body()], 500);
        }
        $resp = $response->json();
+       logger()->info("Valid payment for reference: {$reference}", [$resp]);
        if ($resp['status'] && isset($resp['data'])) {
            $data = $resp['data'];
            if ($data['status'] == 'success') {
                $customerEmail = $data['customer']['email'];
+               logger()->info("Looking up user for payment", ['customer_email' => $customerEmail]);
                $user = User::where('email', $customerEmail)->first();
                if ($user && $user->dlbRegistration) {
+                   logger()->info("Creating payment record", ['user_id' => $user->id, 'payment_data' => $data]);
                    $payment = $user->dlbRegistration->payment()->create([
                        'user_id' => $user->id,
                        'reference' => $data['reference'],
@@ -158,9 +158,13 @@ class DLBRegistrationController extends Controller
                        'provider' => 'PAYSTACK',
                        'paid_at' => Carbon::parse($data['paid_at'])->toDateTimeString(),
                    ]);
-
-               // Send payment success email
-                   Mail::to($customerEmail)->send(new PaymentSuccessMail($user, $payment));
+                    try{
+                        // Send payment success email
+                        logger()->info("Sending payment success email", ['to' => $customerEmail]);
+                        Mail::to($customerEmail)->send(new PaymentSuccessMail($user, $payment));
+                    }catch (\Exception $e){
+                        logger()->error("Failed to send email", [$e->getMessage()]);
+                    }
                }
            }
        }
