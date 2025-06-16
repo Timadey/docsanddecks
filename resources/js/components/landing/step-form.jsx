@@ -58,7 +58,6 @@ export default function RegisterStepForm () {
         post(route('submit-register-dlb'), {
             onFinish: () => setSubmitting(false),
             onSuccess: () => {
-
                 reset();
                 alert('Registration submitted! Proceed to payment');
             },
