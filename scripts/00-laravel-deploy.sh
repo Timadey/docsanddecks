@@ -14,3 +14,6 @@ php artisan route:cache
 
 echo "Running migrations..."
 php artisan migrate --force
+chmod -R 775 database \
+ && chown -R www-data:www-data database \
+ && chown www-data:www-data database/database.sqlite

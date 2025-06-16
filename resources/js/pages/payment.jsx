@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Head } from '@inertiajs/react';
 import FetchUserPaying from '../components/payment/fetch-user-paying.jsx';
 import PaymentDetail from '../components/payment/payment-page.jsx';
+import LandingLayout from '../layouts/landing-layout.jsx';
 
 const PaymentPage = () => {
     const [userName, setUserName] = useState("");
@@ -11,8 +11,7 @@ const PaymentPage = () => {
     const [paid, setPaid] = useState(false);
 
     return (
-        <>
-            <Head title="Payment" />
+        <LandingLayout title={"Payment"} haveHeader={false}>
             <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 via-white to-blue-200 px-4 py-12">
                 {!emailSubmitted
                     ? (<FetchUserPaying
@@ -27,7 +26,7 @@ const PaymentPage = () => {
                     )
                }
             </div>
-        </>
+        </LandingLayout>
     );
 };
 

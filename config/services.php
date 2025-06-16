@@ -42,6 +42,7 @@ return [
 
     'dnd' => [
         'api_url' => env('DND_API_URL', ''),
+        'support_number' => env('SUPPORT_NUMBER', ''),
     ]
 
 ];
