@@ -16,4 +16,6 @@ echo "Running migrations..."
 php artisan migrate --force
 chmod -R 775 database \
  && chown -R www-data:www-data database \
- && chown www-data:www-data database/database.sqlite
+ && chown www-data:www-data database/database.sqlite \
+ && chown -R www-data:www-data storage bootstrap/cache \
+ && chmod -R 775 storage bootstrap/cache

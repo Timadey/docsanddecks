@@ -160,6 +160,9 @@ return [
         '/var/log/httpd/*' => 'Apache',
         '/var/log/nginx/*' => 'Nginx',
 
+        // laravel log docker
+        '/var/www/html/storage/logs/laravel.log',
+
         // MacOS Apple Silicon logs
         '/opt/homebrew/var/log/nginx/*',
         '/opt/homebrew/var/log/httpd/*',
