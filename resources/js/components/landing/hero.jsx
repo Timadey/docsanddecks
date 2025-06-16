@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import pressingLaptop from "@/assets/images/attractive-woman-presssing-laptop.avif";
+import { router } from '@inertiajs/react';
 
 const Hero = () => {
     return (
@@ -28,7 +29,14 @@ const Hero = () => {
                             <p className="mt-8 text-xl text-blue-900">
                                 Unlock your confidence with essential digital skills, master Microsoft Word, Excel, and PowerPoint to thrive in today&#39;s workplace or school all within 8 weeks!
                             </p>
-                            <form action="#" method="POST" className="max-w-xl mx-auto mt-8 bg-white lg:mx-0 sm:bg-transparent lg:mt-12 rounded-xl">
+                            <form
+                                onSubmit={e => {
+                                    e.preventDefault();
+                                    const email = e.target.email.value;
+                                    router.get(route('register-dlb', {email: email}));
+                                }}
+                                className="max-w-xl mx-auto mt-8 bg-white lg:mx-0 sm:bg-transparent lg:mt-12 rounded-xl"
+                            >
                                 <div className="p-4 sm:p-2 sm:bg-white sm:border-2 sm:border-transparent sm:rounded-full sm:focus-within:border-blue-600 sm:focus-within:ring-1 sm:focus-within:ring-blue-600">
                                     <div className="flex flex-col items-start sm:flex-row">
                                         <div className="flex-1 w-full min-w-0">

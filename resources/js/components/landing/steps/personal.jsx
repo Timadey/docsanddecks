@@ -10,6 +10,13 @@ export default function PersonalForm({ formData, onChange, errors }) {
 
     useEffect(() => {
         firstnameRef.current?.focus(); // Auto-focus on the first field
+
+        // Check for email param in URL and set it if present
+        const params = new URLSearchParams(window.location.search);
+        const emailParam = params.get('email');
+        if (emailParam && !formData.email) {
+            onChange({ target: { name: 'email', value: emailParam } });
+        }
     }, []);
 
     // Handle Enter key to go to the next field

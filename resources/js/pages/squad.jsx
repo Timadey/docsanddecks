@@ -1,17 +1,10 @@
-import { Head } from '@inertiajs/react';
-import Header from '../components/landing/header.jsx';
 import SquadHeroSection from '../components/squad/squad-hero.jsx';
 import SquadCardsSection from '../components/squad/squad-perks.jsx';
+import LandingLayout from '../layouts/landing-layout.jsx';
 
 const Squad = () => {
     return (
-        <>
-            <Head title="About Squad">
-                <link rel="preconnect" href="https://fonts.bunny.net" />
-                <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-            </Head>
-            <Header className="mb-10" />
-
+        <LandingLayout title={"About Squad"} haveHeader={true}>
             <section className="min-h-screen flex flex-col justify-center items-center py-16 bg-white relative overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none">
                     <img
@@ -30,7 +23,7 @@ const Squad = () => {
                     </div>
                 </div>
             </section>
-        </>
+        </LandingLayout>
     );
 }
 

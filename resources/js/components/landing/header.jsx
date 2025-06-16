@@ -1,6 +1,6 @@
 import dndlogo from "@/assets/images/dnd-logo-no-bg.avif";
 import React, { useState } from 'react';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 
 export default function Header () {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -39,7 +39,15 @@ export default function Header () {
                         <Link href={route('register-dlb')} title="" className="text-base font-semibold text-blue-900 transition-all duration-200 hover:text-opacity-80"> Register </Link>
                         <Link href={route('payment')} title="" className="text-base font-semibold text-blue-900 transition-all duration-200 hover:text-opacity-80"> Payment </Link>
                         <Link href={route('squad')} title="" className="text-base font-semibold text-blue-900 transition-all duration-200 hover:text-opacity-80"> DnD Squad </Link>
-                        <a href="#" title="" className="text-base font-semibold text-blue-900 transition-all duration-200 hover:text-opacity-80"> Contact us </a>
+<a
+                            href={`https://wa.me/${usePage().props.support_number}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="Contact us on WhatsApp"
+                            className="text-base font-semibold text-blue-900 transition-all duration-200 hover:text-opacity-80"
+                        >
+                            Contact us
+                        </a>
                         <Link href={route('register-dlb')} title="" className="inline-flex items-center justify-center px-5 py-2.5 text-base font-semibold transition-all duration-200 rounded-full bg-blue-600 text-white hover:bg-blue-700 focus:bg-blue-700" role="button">
                             Secure Your Spot
                         </Link>

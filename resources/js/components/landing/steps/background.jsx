@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const options = [
     { value: 'under 18', label: 'Teenager (under 18)' },
@@ -27,6 +27,10 @@ const occupationOptions = [
 ];
 
 export default function BackgroundForm({ formData, onChange, errors }) {
+    const firstFieldRef = useRef(null);
+    useEffect(() => {
+        firstFieldRef.current?.focus(); // Auto-focus on the first field
+    }, []);
     return (
         <>
             <div className="mb-5">
@@ -34,6 +38,7 @@ export default function BackgroundForm({ formData, onChange, errors }) {
                     Age Group
                 </label>
                 <select
+                    ref={firstFieldRef}
                     id="age-group"
                     name="age_group"
                     className="border-2 border-blue-200 rounded-lg px-3 py-2 w-full text-blue-700 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-blue-50/50 placeholder-blue-300"

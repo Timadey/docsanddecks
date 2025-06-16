@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export default function Motivation({ formData, onChange, errors }) {
+    const firstFieldRef = useRef(null);
+    useEffect(() => {
+        firstFieldRef.current?.focus(); // Auto-focus on the first field
+
+        // Check for email param in URL and set it if present
+        const params = new URLSearchParams(window.location.search);
+        const emailParam = params.get('email');
+        if (emailParam && !formData.email) {
+            onChange({ target: { name: 'email', value: emailParam } });
+        }
+    }, []);
     return (
         <>
             <div className="mb-5">
@@ -8,6 +19,7 @@ export default function Motivation({ formData, onChange, errors }) {
                     Why are you registering for this training?
                 </label>
                 <textarea
+                    ref={firstFieldRef}
                     rows="4"
                     id="motivation"
                     name="motivation"
