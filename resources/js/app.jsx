@@ -7,6 +7,10 @@ import { initializeTheme } from './hooks/use-appearance';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
+const cleanApp = () => {
+    document.getElementById('app').removeAttribute('data-page');
+};
+
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => resolvePageComponent(`./pages/${name}.jsx`, import.meta.glob('./pages/**/*.jsx')),
@@ -18,7 +22,7 @@ createInertiaApp({
     progress: {
         color: '#4B5563',
     },
-});
+}).then(cleanApp);
 
 // This will set light / dark mode on load...
 initializeTheme();

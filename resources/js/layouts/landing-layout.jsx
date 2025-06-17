@@ -35,7 +35,7 @@ const LandingLayout = ({ title, haveHeader, children }) => {
             greeting_direction: "column", // Greeting direction may be 'column' or 'row'or 'center'
             call_to_action: "Hey, we are right here! 👋", // Call to action message
             button_color: "#064aea", // Color of button
-            order: "email,twitter,linkedin,whatsapp", // Order of buttons
+            order: "twitter,whatsapp,linkedin,email", // Order of buttons
             ga: true, // Google Analytics enabled
             border: true, // Add button border
             animation: true, // Animation enabled
