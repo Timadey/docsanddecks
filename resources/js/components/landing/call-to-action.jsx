@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Clock } from 'lucide-react';
 import { Link } from '@inertiajs/react';
+import ipadeola from '../../assets/images/ipadeola-cropped.png';
 
 const CallToAction = () => {
     return (
@@ -12,16 +13,16 @@ const CallToAction = () => {
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
                         <img
                             className="object-cover w-20 h-20 rounded-full border-4 border-blue-400 shadow-lg"
-                            src="/images/testimonials/jenny-wilson.jpg"
+                            src={ipadeola}
                             alt="Jenny Wilson"
                         />
                         <blockquote>
                             <p className="mt-8 text-2xl font-bold leading-relaxed text-blue-900 italic">
-                                “This bootcamp transformed my skills—now I breeze through reports and spreadsheets with confidence!”
+                                “I thought I knew Microsoft word but I never knew what I know is just typing not even the main work!”
                             </p>
                         </blockquote>
-                        <p className="mt-8 text-lg font-semibold text-blue-800">Jenny Wilson</p>
-                        <p className="mt-1 text-base text-blue-500">MBA Candidate, University of Ibadan</p>
+                        <p className="mt-8 text-lg font-semibold text-blue-800">Abigeal Ipadeola </p>
+                        <p className="mt-1 text-base text-blue-500">Final Year Student, University of Ibadan</p>
                     </div>
 
                     {/* Enrollment Panel */}

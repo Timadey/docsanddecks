@@ -1,16 +1,53 @@
 import React from 'react';
+import ipadeola from '../../assets/images/ipadeola-cropped.png';
+import hannah from '../../assets/images/hannah-cropped.webp';
+import covenant from '../../assets/images/covenant-cropped.webp';
+import tomilayo from '../../assets/images/tomilayo-cropped.webp';
 
 const Testimonials = () => {
+    const demoTestimonials = [
+        {
+            name: 'Abigeal Ipadeola ',
+            role: 'Student, University of Ibadan',
+            message: "I can say the most valuable of it all is learning Microsoft word because it came at the moment...I was writing my final year project. It helped me with the editing, numbering of pages and so much more. ",
+            avatar: ipadeola,
+        },
+        {
+            name: 'Hannah Ogungbemi',
+            role: '400 level, University of Ibadan',
+            message: "I learnt new things that I'll be forever grateful for. My eyes were opened up to new tools, shortcuts in Microsoft Word and oh, the guidance from the facilitator was the major highlight for me.",
+            avatar: hannah,
+        },
+        {
+            name: 'Covenant Olawale',
+            role: 'Graduate, FUNAAB',
+            message: "I used to feel kind of lost when it came to making document or presentations, but now I feel way more confident. When it comes to excel, I used to feel I know a lot due to the fact that I'm aspiring to be a Data analyst but I've gotten to know different things here that I have not seen before. ",
+            avatar: covenant,
+        },
+        {
+            name: 'Tomilayo Oluwatayo',
+            role: 'Pharmacy, University of Ibadan',
+            message: "Docs and Decks has really expanded my knowledge on Ms word, excel and PowerPoint. If there's something I really loved, it's how the facilitators were very patient and took their time explaining each concept. I really look forward to putting into practice all I've learnt...",
+            avatar: tomilayo,
+        },
+        {
+            name: 'Tijani Ridwanlahi',
+            role: 'Technology Student, University of Ibadan',
+            message: "Docs and Decks helped me while I was trying to write a technical paper for the SPE NAICE conference. The knowledge I gained from the program made the process much smoother and more impactful.",
+            avatar: "", // Placeholder for an image
+        },
+    ];
+
     return (
         <section className="py-12 bg-gradient-to-b from-white via-blue-100 to-white sm:py-16 lg:py-20">
             <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div className="flex flex-col items-center">
                     <div className="text-center">
                         <p className="text-lg font-medium text-blue-600 font-pj">
-                            Real feedbacks from participants of this bootcamp
+                            Real feedback from our learners
                         </p>
                         <h2 className="mt-4 text-3xl font-bold text-blue-900 sm:text-4xl xl:text-5xl font-pj">
-                            Our happy bridgers say about us
+                            What our students are saying
                         </h2>
                     </div>
 
@@ -33,10 +70,7 @@ const Testimonials = () => {
                                 }}
                             ></div>
                         </div>
-                        <div
-                            className="relative w-full overflow-hidden"
-                            style={{ height: '100%' }}
-                        >
+                        <div className="relative w-full overflow-hidden">
                             <div
                                 className="flex gap-6 animate-testimonial-scroll hover:[animation-play-state:paused]"
                                 style={{
@@ -44,10 +78,10 @@ const Testimonials = () => {
                                     animation: 'testimonial-scroll 30s linear infinite',
                                 }}
                             >
-                                {[1, 2, 3, 1, 2, 3].map((item, idx) => (
+                                {demoTestimonials.concat(demoTestimonials).map((testimonial, idx) => (
                                     <div
                                         key={idx}
-                                        className="flex flex-col overflow-hidden shadow-xl rounded-2xl min-w-[350px] max-w-xs"
+                                        className="flex flex-col overflow-hidden shadow-xl rounded-2xl min-w-[350px] lg:min-w-[400px] max-w-xs"
                                     >
                                         <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                             <div className="flex-1">
@@ -66,22 +100,22 @@ const Testimonials = () => {
                                                 </div>
                                                 <blockquote className="flex-1 mt-8">
                                                     <p className="text-lg leading-relaxed text-blue-900 font-pj">
-                                                        “You made it so simple. My new site is so much faster and easier to work with than my old site. I just choose the page, make the change.”
+                                                        “{testimonial.message}”
                                                     </p>
                                                 </blockquote>
                                             </div>
                                             <div className="flex items-center mt-8">
                                                 <img
                                                     className="flex-shrink-0 object-cover rounded-full w-11 h-11"
-                                                    src={`https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-${(item % 3) + 1}.png`}
-                                                    alt=""
+                                                    src={testimonial.avatar}
+                                                    alt={testimonial.name}
                                                 />
                                                 <div className="ml-4">
                                                     <p className="text-base font-bold text-blue-900 font-pj">
-                                                        Leslie Alexander
+                                                        {testimonial.name}
                                                     </p>
                                                     <p className="mt-0.5 text-sm font-pj text-blue-600">
-                                                        Freelance React Developer
+                                                        {testimonial.role}
                                                     </p>
                                                 </div>
                                             </div>
