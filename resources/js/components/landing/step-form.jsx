@@ -79,8 +79,7 @@ export default function RegisterStepForm () {
 
     return (
         <>
-            <div className="relative max-w-xl w-full mt-10 text-center lg:text-left overflow-auto max-h-screen px-4">
-
+            <div className="relative max-w-xl w-full mt-10 text-center lg:text-left overflow-auto max-h-screen px-2">
                 {/* Step Form */}
                 <div className="border-b p-6 border-blue-300">
                     <div className="relative mb-2">
@@ -109,6 +108,11 @@ export default function RegisterStepForm () {
                             </span>
                         ))}
                     </div>
+                </div>
+                {/* Quote from a past student */}
+                <div className="mb-4 px-4 py-3 bg-blue-50 text-sm border-l-4 border-blue-400 text-blue-900 italic rounded">
+                    “I remember when I filled the form to apply, we were asked to pick our proficiency in each of the digital skills. I picked intermediate in MS word because I thought I knew all there is to it. Looking back now, I should have picked basic!.”<br />
+                    <span className="block mt-2 font-semibold text-blue-700">— Oluwatayo Tomilayo, Alumni</span>
                 </div>
 
                 <div className="bg-white rounded-xl mt-10 p-6 border-t border-gray-200  shadow-md sm:p-8">

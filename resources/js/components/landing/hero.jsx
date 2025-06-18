@@ -27,7 +27,7 @@ const Hero = () => {
                                 </span>
                             </h1>
                             <p className="mt-8 text-xl text-blue-900">
-                                Unlock your confidence with essential digital skills, master Microsoft Word, Excel, and PowerPoint to thrive in today&#39;s workplace or school all within 8 weeks!
+                                Unlock your confidence with essential digital skills, master Microsoft Word, Excel, and PowerPoint to thrive in today&#39;s workplace or school all within 6 weeks!
                             </p>
                             <form
                                 onSubmit={e => {

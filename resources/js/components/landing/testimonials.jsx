@@ -1,8 +1,9 @@
 import React from 'react';
-import ipadeola from '../../assets/images/ipadeola-cropped.png';
+import ipadeola from '../../assets/images/ipadeola-cropped.webp';
 import hannah from '../../assets/images/hannah-cropped.webp';
 import covenant from '../../assets/images/covenant-cropped.webp';
 import tomilayo from '../../assets/images/tomilayo-cropped.webp';
+import dndlogo from '@/assets/images/dnd-logo-no-bg.avif';
 
 const Testimonials = () => {
     const demoTestimonials = [
@@ -34,7 +35,7 @@ const Testimonials = () => {
             name: 'Tijani Ridwanlahi',
             role: 'Technology Student, University of Ibadan',
             message: "Docs and Decks helped me while I was trying to write a technical paper for the SPE NAICE conference. The knowledge I gained from the program made the process much smoother and more impactful.",
-            avatar: "", // Placeholder for an image
+            avatar: dndlogo, // Placeholder for an image
         },
     ];
 
@@ -75,7 +76,7 @@ const Testimonials = () => {
                                 className="flex gap-6 animate-testimonial-scroll hover:[animation-play-state:paused]"
                                 style={{
                                     width: 'max-content',
-                                    animation: 'testimonial-scroll 30s linear infinite',
+                                    animation: 'testimonial-scroll 60s linear infinite',
                                 }}
                             >
                                 {demoTestimonials.concat(demoTestimonials).map((testimonial, idx) => (

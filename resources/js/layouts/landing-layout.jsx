@@ -19,7 +19,7 @@ const LandingLayout = ({ title, haveHeader, children }) => {
             whatsapp_agent_image_1: "https://static.getbutton.io/img/flag.jpg?v=1", // WhatsApp agent image 1
             whatsapp_agent_image_4: "https://static.getbutton.io/img/flag.jpg?v=1", // WhatsApp agent image 4
             whatsapp_agent_image_5: "https://static.getbutton.io/img/flag.jpg?v=1", // WhatsApp agent image 5
-            pre_filled_message: "Hello", // WhatsApp pre-filled message
+            pre_filled_message: "Hello, I have a few questions...", // WhatsApp pre-filled message
             whatsapp_popup_title: "Start a Conversation", // WhatsApp popup title
             whatsapp_popup_subtitle: "Click one of our members below to chat", // WhatsApp popup subtitle
             greeting: true, // Greeting message enabled
@@ -52,10 +52,12 @@ const LandingLayout = ({ title, haveHeader, children }) => {
         <>
             <Head title={title}>
                 <link rel="preconnect" href="https://fonts.bunny.net" />
-                <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+                {/*<link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />*/}
             </Head>
             {haveHeader && <Header className="mb-10" />}
-            {children}
+            <div className="min-h-screen bg-white text-black">
+                {children}
+            </div>
         </>
     );
 };

@@ -18,7 +18,6 @@ import publicSpeaking from "../../assets/images/public-speaking-tips2.avif";
 import handsOnAss from "../../assets/images/hands-on-assignment.avif";
 import expertSupport from "../../assets/images/expert-support.avif";
 import completionCert from "../../assets/images/certificate-of-completion.avif";
-import bgWomanLaptop from '../../assets/images/attractive-woman-presssing-laptop.avif';
 
 const gains = [
     {
@@ -101,7 +100,7 @@ const WhatYouWillGain = () => {
                             <div className="absolute inset-0 bg-blue-950/60"></div>
                             <div className="relative z-10 flex flex-col items-center justify-center h-full w-full p-8">
                                 {item.icon}
-                                <h3 className="text-2xl font-semibold text-blue-100 mb-3 drop-shadow">{item.title}</h3>
+                                <h3 className="text-2xl font-semibold text-white mb-3 drop-shadow">{item.title}</h3>
                                 <p className="text-blue-100 text-base drop-shadow">{item.desc}</p>
                             </div>
                         </div>

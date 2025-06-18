@@ -21,7 +21,7 @@ export default function Welcome() {
             <WhyUs />
             <Testimonials />
             <OurNumbers />
-            <Faq />
+            {/*<Faq />*/}
             <CallToAction />
             <Footer />
         </LandingLayout>
