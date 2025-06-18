@@ -66,7 +66,7 @@ const TrainingOutline = () => {
                     </h2>
                     {/*<h2 className="text-4xl font-bold text-blue-700 sm:text-5xl lg:text-5xl">What You’ll Learn</h2>*/}
                     <p className="max-w-xl mx-auto mt-4 text-base text-gray-600">
-                        An 8-week hands-on training covering Microsoft Word, Excel, and PowerPoint in <strong>13 core steps</strong> designed to make you digitally fluent.
+                        A 6-week hands-on training covering Microsoft Word, Excel, and PowerPoint in <strong>13 core steps</strong> designed to make you digitally fluent.
                     </p>
                 </div>
 

@@ -28,14 +28,18 @@ const DLBRegisterForm = () => {
                                 clipRule="evenodd"
                             />
                         </svg>
-                        <h2 className="font-bold text-white text-4xl sm:text-6xl ml-2.5">583</h2>
+                        <h2 className="font-bold text-white text-4xl sm:text-6xl ml-2.5">
+                            <span className="line-through text-blue-200 mr-2 text-2xl sm:text-4xl">₦7,000</span>
+                            ₦5,600
+                        </h2>
                     </div>
                     <p className="max-w-xs mt-1.5 text-sm sm:text-lg text-white leading-relaxed">
-                        Bridgers have learnt how to write proper documents, analyse data and present them like a pro!
+                        This discount is available to people who follow us on our socials! Like we said our pricing is chicken feed, we are here to help you learn and grow.
                     </p>
                 </div>
             </div>
             {/* Right: Step Form */}
+
             <div className="relative pointer-events-auto flex-1 flex items-center justify-center w-full lg:w-7/12 h-auto lg:h-screen py-10 px-6 sm:px-10 lg:py-24 md:mt-24">
             <RegisterStepForm />
             </div>

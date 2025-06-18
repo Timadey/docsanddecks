@@ -13,7 +13,7 @@ export default function Footer() {
                             <h2 className="text-lg font-bold text-blue-700">Docs and Decks</h2>                        </a>
 
                         <div className="mt-2">
-                            <a href="https://x.com/compose/tweet?text=I%27ve%20been%20using%20%23SpectrumUI%20share%20your%20thoughts%20%40arihantCodes">
+                            <a href="https://x.com/compose/tweet?text=I%27ve%20been%20learning%20%23DocsandDecks%20and%20here%20are%20my%20thoughts">
                                 <Button variant="secondary" className="bg-blue-600 text-white hover:bg-blue-700">
                                     Share Your Thoughts On
                                     <Twitter className="ml-1 h-4 w-4 text-blue-300" />
