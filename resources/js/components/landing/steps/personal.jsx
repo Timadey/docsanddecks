@@ -9,7 +9,7 @@ export default function PersonalForm({ formData, onChange, errors }) {
     const phoneRef = useRef(null);
 
     useEffect(() => {
-        firstnameRef.current?.focus(); // Auto-focus on the first field
+        //firstnameRef.current?.focus(); // Auto-focus on the first field
 
         // Check for email param in URL and set it if present
         const params = new URLSearchParams(window.location.search);
