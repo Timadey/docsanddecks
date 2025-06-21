@@ -9,7 +9,7 @@ const DLBRegisterForm = () => {
             <div className="absolute inset-0">
                     <img
                         className="object-cover w-full h-full scale-150 md:scale-125 lg:scale-100 transition-transform duration-500"
-                        src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/3/man-working-on-laptop.jpg"
+                        src="https://img.freepik.com/free-photo/medium-shot-man-working-with-laptop_23-2149161007.jpg?uid=R114449743&ga=GA1.1.20347306.1743427258&w=740"
                         alt=""
                     />
                 </div>
@@ -33,8 +33,11 @@ const DLBRegisterForm = () => {
                             ₦5,600
                         </h2>
                     </div>
-                    <p className="max-w-xs mt-1.5 text-sm sm:text-lg text-white leading-relaxed">
+                    <p className="mt-1.5 text-sm sm:text-lg text-white leading-relaxed">
                         This discount is available to people who follow us on our socials! Like we said our pricing is chicken feed, we are here to help you learn and grow.
+                    </p>
+                    <p className="mt-2 text-sm sm:text-lg text-white leading-relaxed">
+                        An email will be sent to you after registration and payment for confirmation. Don&#39;t forget to join the participant&#39;s group and also follow us on our social media platforms.
                     </p>
                 </div>
             </div>
