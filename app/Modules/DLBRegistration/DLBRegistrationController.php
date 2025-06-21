@@ -28,7 +28,7 @@ class DLBRegistrationController extends Controller
             'lastname'       => 'required|string|max:255',
             'middlename'     => 'nullable|string|max:255',
             'gender'         => 'required|string|in:male,female',
-            'email'          => 'required|email|max:255|unique:users,email',
+            'email'          => 'required|email:dns,rfc,spoof|max:255|unique:users,email',
             'phone'          => 'required|string|max:15|unique:users,phone',
             'age_group'      => 'required|string|max:50',
             'msword_level'   => 'required|string|max:50',
