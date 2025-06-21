@@ -4,6 +4,7 @@ namespace App\Modules\DLBRegistration;
 
 use App\Http\Controllers\Controller;
 use App\Mail\PaymentSuccessMail;
+use App\Mail\RegistrationSuccessMail;
 use App\Models\User;
 use App\Modules\SquadMember\SquadMember;
 use Carbon\Carbon;
@@ -37,7 +38,16 @@ class DLBRegistrationController extends Controller
             'occupation'     => 'required|string|max:255',
             'motivation'     => 'required|string|max:1000',
             'hear_source'    => 'required|string|max:100',
-            'referral'       => 'nullable|string|max:100|exists:squad_member,referral_code',
+            'referral'       => [
+                'nullable',
+                'string',
+                'max:100',
+                function ($attribute, $value, $fail) {
+                    if ($value && !SquadMember::whereRaw('LOWER(referral_code) = ?', [strtolower($value)])->exists()) {
+                        $fail('The selected referral code is invalid.');
+                    }
+                },
+            ],
             'will_commit'    => 'required|boolean',
         ]);
         logger()->info("New user submit registration", ['data' => $request->all(), 'ip' => $request->ip()]);
@@ -59,6 +69,15 @@ class DLBRegistrationController extends Controller
 
         logger()->info("Creating DLB registration for user", ['user_id' => $user->id, 'validated' => $validated]);
         $user->dlbRegistration()->create($validated);
+        $email = $user->email;
+
+        try{
+            // Send registration success email
+            logger()->info("Sending registration success email", ['to' => $email]);
+            Mail::to($email)->send(new RegistrationSuccessMail($user));
+        }catch (\Exception $e){
+            logger()->error("Failed to send registration email", [$e->getMessage()]);
+        }
 
         return redirect()->route('payment', ['email' => $user->email])
             ->with('success', 'Registration done successfully, proceed to payment.');
@@ -163,7 +182,7 @@ class DLBRegistrationController extends Controller
                         logger()->info("Sending payment success email", ['to' => $customerEmail]);
                         Mail::to($customerEmail)->send(new PaymentSuccessMail($user, $payment));
                     }catch (\Exception $e){
-                        logger()->error("Failed to send email", [$e->getMessage()]);
+                        logger()->error("Failed to send payment success email", [$e->getMessage()]);
                     }
                }
            }

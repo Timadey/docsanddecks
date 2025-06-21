@@ -8,16 +8,18 @@ Route::get('/', function () {
 })->name('home');
 
 //Route::get('/testmail', function () {
-//    return view('emails.payment_success', [
+//    return view('emails.registration_success', [
 //        'user' => (object)[
-//            'name' => 'Jane Doe'
+//            'firstname' => 'Jane Doe'
 //        ],
-//        'payment' => (object)[
-//            'reference' => 'PAY123456789',
-//            'amount_paid' => 250000,
-//            'payment_method' => 'card',
-//            'paid_at' => now(),
-//        ]
+//        'paymentLink' => route('payment', ['email' => 'dlktimothy@gmail.com']),
+//        'whatsappGroupLink' => 'http://docs_and_decks.test',
+//        // 'payment' => (object)[
+//        //     'reference' => 'PAY123456789',
+//        //     'amount_paid' => 250000,
+//        //     'payment_method' => 'card',
+//        //     'paid_at' => now(),
+//        // ]
 //    ]);
 //})->name('testmail');
 
@@ -32,6 +34,10 @@ Route::get('payment', function () {
 Route::get('squad', function () {
     return Inertia::render('squad');
 })->name('squad');
+
+Route::get('privacy-policy', function () {
+    return Inertia::render('privacy-policy');
+})->name('privacy-policy');
 
 
 Route::middleware(['auth', 'verified'])->group(function () {

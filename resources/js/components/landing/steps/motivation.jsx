@@ -58,7 +58,7 @@ export default function Motivation({ formData, onChange, errors }) {
             </div>
             <div className="mb-6">
                 <label htmlFor="referral" className="block text-blue-900 font-medium mb-2">
-                    Enter your referral code (case-sensitive)
+                    Enter your referral code
                 </label>
                 <input
                     type="text"

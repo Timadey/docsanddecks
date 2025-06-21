@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import pressingLaptop from "@/assets/images/attractive-woman-presssing-laptop.avif";
+import dndCurved from "@/assets/images/dnd-curved.png";
 import { router } from '@inertiajs/react';
 
 const Hero = () => {
@@ -77,7 +78,8 @@ const Hero = () => {
                         </div>
 
                         <div className="absolute right-0 z-0 -bottom-16 lg:top-24 lg:-left-20">
-                            <img className="w-32 h-32 md:w-40 md:h-40" src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/3/circular-text.png" alt="" />
+                            {/*<img className="w-32 h-32 md:w-40 md:h-40" src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/3/circular-text.png" alt="" />*/}
+                            <img className="-ml-4 w-40 h-32 md:w-45 md:h-40" src={dndCurved} alt="" />
                         </div>
                     </div>
 
