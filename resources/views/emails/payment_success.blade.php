@@ -79,7 +79,7 @@
                 <tr>
                     <td style="background-color: #f9fafb; padding: 24px 20px; text-align: center; font-size: 13px; color: #94a3b8; border-top: 1px solid #e2e8f0;">
                         &copy; {{ date('Y') }} <strong style="color: #3b82f6;">Docs and Decks</strong>. All rights reserved.<br>
-                        Need help? <a href="mailto:support@docsanddecks.com" style="color: #3b82f6; text-decoration: underline;">Contact Support</a>
+                        Need help? <a href="mailto:info@docsanddecks.com" style="color: #3b82f6; text-decoration: underline;">Contact Support</a>
                     </td>
                 </tr>
             </table>

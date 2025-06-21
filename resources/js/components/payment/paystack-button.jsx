@@ -33,7 +33,7 @@ const PaystackButton = ({ amount, user, onSuccess }) => {
     }
     return (
         <button
-            className={`w-full mt-4 py-3 text-white font-bold rounded-xl text-lg transition shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 ${
+            className={`cursor-pointer w-full mt-4 py-3 text-white font-bold rounded-xl text-lg transition shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 ${
                 loading ? 'cursor-not-allowed bg-blue-300' : 'bg-gradient-to-r from-blue-700 to-blue-500 hover:from-blue-800 hover:to-blue-600'
             }`}
             disabled={loading}

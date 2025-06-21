@@ -41,7 +41,13 @@ const CallToAction = () => {
                             <div className="mt-6 text-sm text-blue-700 bg-blue-100 px-4 py-2 rounded-md flex items-center">
                                 <Clock className="w-4 h-4 mr-2 flex-shrink-0" />
                                 <span>
-                                    Limited-time offer: Follow us online and get up to 20% off your Docs and Decks Bootcamp fee. Offer closes June 30!
+                                   Limited-time offer: Follow us online and get up to 20% off your Docs and Decks Bootcamp fee. Offer closes {
+                                     (() => {
+                                       const now = new Date();
+                                       const closeDate = new Date(now.getTime() + 21 * 24 * 60 * 60 * 1000);
+                                       return closeDate.toLocaleString('en-US', { month: 'long', day: 'numeric' });
+                                     })()
+                                   }!
                                   </span>
                             </div>
 
@@ -61,7 +67,7 @@ const CallToAction = () => {
                             </a>
 
                             <p className="mt-6 text-sm text-blue-400">
-                                Registration closes June 30
+                                Registration closes July 20
                             </p>
                         </div>
                     </div>
