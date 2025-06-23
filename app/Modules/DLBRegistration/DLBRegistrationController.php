@@ -78,9 +78,10 @@ class DLBRegistrationController extends Controller
         }catch (\Exception $e){
             logger()->error("Failed to send registration email", [$e->getMessage()]);
         }
+        return redirect()->away('https://chat.whatsapp.com/LMUwvp2pNMXHAOmwHXSDcn');
 
-        return redirect()->route('payment', ['email' => $user->email])
-            ->with('success', 'Registration done successfully, proceed to payment.');
+//        return redirect()->route('payment', ['email' => $user->email])
+//            ->with('success', 'Registration done successfully, proceed to payment.');
     }
 
     public function getUserByEmail(Request $request)

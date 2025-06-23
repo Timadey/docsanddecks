@@ -68,7 +68,7 @@ export default function RegisterStepForm() {
             onSuccess: () => {
                 reset();
                 alert(
-                    '🎉 Registration successful! Please check your email for further instructions. Click OK to proceed to payment.'
+                    '🎉 Registration successful! Please check your email for further instructions. Click OK to proceed to participant\'s group.'
                 );
             },
             onError: (error) => {
