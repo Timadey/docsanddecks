@@ -93,13 +93,17 @@ const PaymentDetail = ({ userName, userPaying, referrer, paid }) => {
             const res = await fetch("/api/payment/validate-referral", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": csrfToken },
-                body: JSON.stringify({ code }),
+                body: JSON.stringify({ code, email: userPaying.email }),
             });
             const data = await res.json();
             if (data.valid) {
                 setReferral({ code: data.code, valid: true, referrer: data.referrer });
             } else {
-                setError("Invalid referral code");
+                if(data.message) {
+                    setError(data.message)
+                }else{
+                    setError("Invalid referral code");
+                }
             }
             setLoading(false);
             return data;

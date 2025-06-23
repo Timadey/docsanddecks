@@ -118,12 +118,21 @@ class DLBRegistrationController extends Controller
     public function validateReferral(Request $request)
     {
         $request->validate([
-            'code' => 'required|string'
+            'code' => 'required|string',
+            'email' => 'required|email',
         ]);
         logger()->info("Validating referral code", ['code' => $request->input('code')]);
         $referral = SquadMember::where('referral_code', $request->input('code'))->first();
 
-        if ($referral) {
+        if ($referral && $referral->user ) {
+            // squad members can refer themselves
+            if ($referral->user->email == $request->input('email')) {
+                return response()->json([
+                    'valid' => false,
+                    'referrer' => '',
+                    'message' => 'You can\'t refer yourself, lol, share the code with your friends instead.'
+                ]);
+            }
             return response()->json([
                 'valid' => true,
                 'referrer' => $referral->user->firstname,
