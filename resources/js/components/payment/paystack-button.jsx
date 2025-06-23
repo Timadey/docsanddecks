@@ -16,6 +16,7 @@ const PaystackButton = ({ amount, user, onSuccess }) => {
             lastName: user.lastname,
             phone: user.phone,
             amount: amount * 100,
+            channels: ['card', 'bank', 'ussd', 'qr', 'eft', 'mobile_money', 'bank_transfer', 'apple_pay'],
             onSuccess: (transaction) => {
                 console.log(transaction);
                 if (onSuccess) onSuccess(transaction);
