@@ -95,6 +95,52 @@ export default function Motivation({ formData, onChange, errors }) {
                 {errors?.will_commit && <div className="text-red-500 text-xs mt-1">{errors.will_commit}</div>}
                 <small className="text-sm text-blue-400">For your success, we need you to be accountable in this training by attending sessions and submitting tasks on time. Are you willing to commit to your growth?</small>
             </div>
+
+            <div className="mb-5">
+                <label htmlFor="followed-socials" className="block text-blue-900 font-medium mb-2">
+                    The 20% discount is for people who have followed us on our social media platforms:
+                    <ul className="list-disc list-inside mt-2 text-blue-700 font-normal">
+                        <li>
+                            <a
+                                href="https://x.com/docsdecks"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-600 hover:underline"
+                            >
+                                X (Twitter) @docsdecks
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://linkedin.com/company/docsdecks"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-600 hover:underline"
+                            >
+                                LinkedIn /docsdecks
+                            </a>
+                        </li>
+                    </ul>
+                    <div className="mt-3">Have you followed us?</div>
+                </label>
+                <select
+                    id="followed-socials"
+                    name="followed_socials"
+                    className="border-2 border-blue-200 rounded-lg px-3 py-2 w-full text-blue-700 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-blue-50/50 placeholder-blue-300"
+                    value={formData.followed_socials || ''}
+                    onChange={onChange}
+                >
+                    <option value="">Select option</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                {errors?.followed_socials && (
+                    <div className="text-red-500 text-xs mt-1">{errors.followed_socials}</div>
+                )}
+                <small className="text-sm text-blue-400">
+                    Following us helps you stay updated and unlocks your 20% discount.
+                </small>
+            </div>
         </>
     );
 }
