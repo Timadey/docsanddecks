@@ -98,14 +98,14 @@ export default function Motivation({ formData, onChange, errors }) {
 
             <div className="mb-5">
                 <label htmlFor="followed-socials" className="block text-blue-900 font-medium mb-2">
-                    The 20% discount is for people who have followed us on our social media platforms:
+                    The 20% discount is for people who have followed us on our social media platforms, follow us now if you have not:
                     <ul className="list-disc list-inside mt-2 text-blue-700 font-normal">
                         <li>
                             <a
                                 href="https://x.com/docsdecks"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-blue-600 hover:underline"
+                                className="text-blue-600 underline"
                             >
                                 X (Twitter) @docsdecks
                             </a>
@@ -115,7 +115,7 @@ export default function Motivation({ formData, onChange, errors }) {
                                 href="https://linkedin.com/company/docsdecks"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-blue-600 hover:underline"
+                                className="text-blue-600 underline"
                             >
                                 LinkedIn /docsdecks
                             </a>
