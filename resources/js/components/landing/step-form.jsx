@@ -35,6 +35,7 @@ export default function RegisterStepForm() {
         hear_source: '',
         referral: '',
         will_commit: '',
+        followed_socials: ''
     });
 
     const handleChange = (e) => {
