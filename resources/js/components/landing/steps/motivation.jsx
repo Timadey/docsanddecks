@@ -105,7 +105,7 @@ export default function Motivation({ formData, onChange, errors }) {
                                 href="https://x.com/docsdecks"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-blue-600 hover:underline"
+                                className="text-blue-600 underline"
                             >
                                 X (Twitter) @docsdecks
                             </a>
@@ -115,7 +115,7 @@ export default function Motivation({ formData, onChange, errors }) {
                                 href="https://linkedin.com/company/docsdecks"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-blue-600 hover:underline"
+                                className="text-blue-600 underline"
                             >
                                 LinkedIn /docsdecks
                             </a>
