@@ -71,6 +71,7 @@ export default function RegisterStepForm() {
                 alert(
                     '🎉 Registration successful! Please check your email for further instructions. Click OK to proceed to participant\'s group.'
                 );
+                window.location.href = 'https://chat.whatsapp.com/LMUwvp2pNMXHAOmwHXSDcn';
             },
             onError: (error) => {
                 setErrorMessage('😞 There was an error with your submission. Please check the form and try again. If the problem persists, kindly contact support.');
