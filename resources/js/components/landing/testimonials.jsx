@@ -4,6 +4,7 @@ import hannah from '../../assets/images/hannah-cropped.webp';
 import covenant from '../../assets/images/covenant-cropped.webp';
 import tomilayo from '../../assets/images/tomilayo-cropped.webp';
 import dndlogo from '@/assets/images/dnd-logo-no-bg.avif';
+import { Link } from '@inertiajs/react';
 
 const Testimonials = () => {
     const demoTestimonials = [
@@ -53,12 +54,12 @@ const Testimonials = () => {
                     </div>
 
                     <div className="mt-8 text-center md:mt-16 md:order-3">
-                        <a
-                            href="#"
+                        <Link
+                            href={route('register-dlb')}
                             className="pb-2 text-base font-bold leading-7 text-blue-900 transition-all duration-200 border-b-2 border-blue-900 hover:border-blue-600 hover:text-blue-600 font-pj focus:outline-none focus:ring-1 focus:ring-blue-900 focus:ring-offset-2"
                         >
                             Join the next cohort
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="relative mt-10 md:mt-24 md:order-2">

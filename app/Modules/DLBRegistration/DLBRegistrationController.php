@@ -6,19 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Mail\PaymentSuccessMail;
 use App\Mail\RegistrationSuccessMail;
 use App\Models\User;
+use App\Modules\Payment\PaymentService;
 use App\Modules\SquadMember\SquadMember;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Inertia\Inertia;
 
+// @todo: i need to clean up teh whole of this application, this is just an mvp
 class DLBRegistrationController extends Controller
 {
-    protected GSheetService $gsheet;
+    protected PaymentService $paymentService;
 
-    public function __construct(GSheetService $gsheet)
+    public function __construct(PaymentService $paymentService)
     {
-        $this->gsheet = $gsheet;
+        $this->paymentService = $paymentService;
     }
 
     public function register(Request $request)
@@ -29,7 +32,7 @@ class DLBRegistrationController extends Controller
             'middlename'     => 'nullable|string|max:255',
             'gender'         => 'required|string|in:male,female',
             'email'          => 'required|email:dns,rfc,spoof|max:255|unique:users,email',
-            'phone'          => 'required|string|max:15|unique:users,phone',
+            'phone'          => 'required|string|max:18|unique:users,phone',
             'age_group'      => 'required|string|max:50',
             'msword_level'   => 'required|string|max:50',
             'msexcel_level'  => 'required|string|max:50',
@@ -78,6 +81,9 @@ class DLBRegistrationController extends Controller
         }catch (\Exception $e){
             logger()->error("Failed to send registration email", [$e->getMessage()]);
         }
+        $ip = request()->header('CF-Connecting-IP') ?? request()->ip();
+        // Get user's country and currency
+        $this->updateUserLocation($user, $ip);
         return redirect()->back()->with('success', 'Registration successful');
 //        return response()->json([
 //            'redirect' => 'https://chat.whatsapp.com/LMUwvp2pNMXHAOmwHXSDcn',
@@ -85,6 +91,25 @@ class DLBRegistrationController extends Controller
 
 //        return redirect()->route('payment', ['email' => $user->email])
 //            ->with('success', 'Registration done successfully, proceed to payment.');
+    }
+
+    public function updateUserLocation(User $user, string $ip)
+    {
+        logger()->info("Updating user location", ['email' => $user->email]);
+        // Get user's country and currency
+        $location = Http::get("https://ipapi.co/{$ip}/json/")->json();
+        if (isset($location['error']) || !isset($location['country']) || !isset($location['currency'])) {
+            logger()->warning("Could not fetch location data for IP: {$ip}", ['response' => $location]);
+            return $user;
+        }
+        logger()->info("Fetched location data", ['location' => $location]);
+        $user->profile()->updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'location' => json_encode($location),
+            ]
+        );
+        return response()->json(['success' => true, 'message' => 'Location updated successfully.', 'data' => $location ]);
     }
 
     public function getUserByEmail(Request $request)
@@ -96,6 +121,13 @@ class DLBRegistrationController extends Controller
         $user = User::with(['dlbRegistration.referredBy'])->where('email', $request->input('email'))->first();
         if ($user && $user->dlbRegistration) {
             //dd($user);
+            // Update location if not set
+            if (!$user->profile || !$user->profile->location) {
+                $ip = request()->header('CF-Connecting-IP') ?? request()->ip();
+                $this->updateUserLocation($user, $ip);
+                // Refresh user profile after update
+                $user->refresh();
+            }
             $payment = $user->dlbRegistration->payment;
             return response()->json([
                 'success'=> true,
@@ -113,7 +145,8 @@ class DLBRegistrationController extends Controller
                 'referral' => [
                     'code' => $user->dlbRegistration->referredBy?->referral_code,
                     'name' => $user->dlbRegistration->referredBy?->user->firstname,
-                ] ]);
+                ]
+            ]);
         }
         return response()->json(['success'=> false,'error' => 'No participant found with that email.']);
     }
@@ -175,33 +208,72 @@ class DLBRegistrationController extends Controller
            $data = $resp['data'];
            if ($data['status'] == 'success') {
                $customerEmail = $data['customer']['email'];
-               logger()->info("Looking up user for payment", ['customer_email' => $customerEmail]);
-               $user = User::where('email', $customerEmail)->first();
-               if ($user && $user->dlbRegistration) {
-                   logger()->info("Creating payment record", ['user_id' => $user->id, 'payment_data' => $data]);
-                   $payment = $user->dlbRegistration->payment()->create([
-                       'user_id' => $user->id,
-                       'reference' => $data['reference'],
-                       'amount_charged' => $data['requested_amount'] / 100,
-                       'amount_paid' => $data['amount'] / 100,
-                       'currency' => $data['currency'],
-                       'status' => strtolower($data['status']),
-                       'payment_method' => $data['channel'],
-                       'provider' => 'PAYSTACK',
-                       'paid_at' => Carbon::parse($data['paid_at'])->toDateTimeString(),
-                   ]);
-                    try{
-                        // Send payment success email
-                        logger()->info("Sending payment success email", ['to' => $customerEmail]);
-                        Mail::to($customerEmail)->send(new PaymentSuccessMail($user, $payment));
-                    }catch (\Exception $e){
-                        logger()->error("Failed to send payment success email", [$e->getMessage()]);
-                    }
-               }
+               $data['provider'] = 'PAYSTACK';
+               $this->paymentService->recordUserPayment($data, $customerEmail);
            }
        }
        return response($response->body(), 200)
            ->header('Content-Type', 'application/json');
+    }
+
+    public function initializeRave(Request $request)
+    {
+        //@todo: i know this is not right, collecting amount from frontend, but this is a minimal application
+        // worst case refund their money if they pay less than the required amount
+        $request->validate([
+            'email' => 'required|email',
+            'amount' => 'required|numeric|min:1',
+            'currency' => 'required|string|max:3',
+        ]);
+
+        logger()->info("Initializing Rave payment", [
+            'email' => $request->input('email'),
+            'amount' => $request->input('amount'),
+            'currency' => $request->input('currency'),
+        ]);
+
+        $user = User::where('email', $request->input('email'))->firstorFail();
+        $data = [
+            'email' => $request->input('email'),
+            'amount' => $request->input('amount'),
+            'currency' => $request->input('currency'),
+            'name' => "{$user->firstname }{$user->lastname}",
+            'redirect_url' => route('payment.confirm-rave'),
+        ];
+
+        $paymentObject = $this->paymentService->makePayment($data);
+        logger()->info("Rave payment initialized", [$paymentObject]);
+        return response()->json([
+            'success' => true,
+            'payment_url' => $paymentObject->data->link,
+            //'reference' => $paymentObject->data->reference,
+        ]);
+    }
+
+    public function confirmRave(Request $request)
+    {
+        logger()->info("Confirming Rave payment", ['query' => $request->query()]);
+
+        $query = (object) $request->query();
+        $transaction_id = $query->transaction_id ?? null;
+        $status = $query->status  ?? null;
+        $tx_ref = $query->tx_ref  ?? null;
+        $resp = $this->paymentService->confirmPayment($transaction_id, $status, $tx_ref);
+        //dd($resp);
+        if ($resp['success'] && isset($resp['data']) && $resp['data']['status'] == 'successful') {
+            $data = $resp['data'];
+            $data['provider'] = 'FLUTTERWAVE';
+            $data['reference'] = $data['tx_ref'];
+            $data['requested_amount'] = $data['charged_amount'];
+            $data['amount_paid'] = $data['amount'];
+            $data['channel'] = $data['payment_type'];
+            $data['paid_at'] = $data['created_at'];
+            $data['status'] = 'success';
+            $customerEmail = $data['customer']['email'] ?? null;
+            $this->paymentService->recordUserPayment($data, $customerEmail);
+            return Inertia::render('payment-check', ['payment_success' => true]);
+        }
+        return Inertia::render('payment-check', ['payment_success' => false]);
     }
 
 }

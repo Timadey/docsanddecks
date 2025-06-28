@@ -40,7 +40,7 @@ export default function Header () {
                         <Link href={route('payment')} title="" className="text-base font-semibold text-blue-900 transition-all duration-200 hover:text-opacity-80"> Payment </Link>
                         <Link href={route('squad')} title="" className="text-base font-semibold text-blue-900 transition-all duration-200 hover:text-opacity-80"> DnD Squad </Link>
 <a
-                            href={`https://wa.me/${usePage().props.support_number}`}
+                            href={`https://api.whatsapp.com/send/?phone=${usePage().props.support_number}&text=Hello%2C+I+have+a+few+questions...&type=phone_number&app_absent=0`}
                             target="_blank"
                             rel="noopener noreferrer"
                             title="Contact us on WhatsApp"

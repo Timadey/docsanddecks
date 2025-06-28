@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('dlb_registration', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('user_id')->nullable()->index();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('age_group', 50);
             $table->string('msword_level', 50);
             $table->string('msexcel_level', 50);
@@ -29,7 +29,7 @@ return new class extends Migration
 
         Schema::create('squad_member', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->index();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('referral_code', 50)->unique();
             $table->timestamps();
         });

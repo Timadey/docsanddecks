@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import Header from '../components/landing/header.jsx';
 
 const LandingLayout = ({ title, haveHeader, children }) => {
@@ -13,7 +13,7 @@ const LandingLayout = ({ title, haveHeader, children }) => {
             twitter: "docsdecks", // Twitter User ID
             twitter_color: "#000000", // Twitter button color
             twitter_label: "X.com", // Twitter button label
-            whatsapp: "+2347065380726", // WhatsApp number
+            whatsapp: usePage().props.support_number, // WhatsApp number
             whatsapp_color: "#4dc247", // WhatsApp button color
             whatsapp_label: "WhatsApp", // WhatsApp button label
             whatsapp_agent_image_1: "https://static.getbutton.io/img/flag.jpg?v=1", // WhatsApp agent image 1
@@ -24,11 +24,11 @@ const LandingLayout = ({ title, haveHeader, children }) => {
             whatsapp_popup_subtitle: "Click one of our members below to chat", // WhatsApp popup subtitle
             greeting: true, // Greeting message enabled
             company_logo_url: "//storage.getbutton.io/widget/5e/5e56/5e56af27509c0d35cb52898619f0e5c2/logo.png", // URL of company logo (png, jpg, gif)
-            greeting_message: "Hey 👋 What’s up? Need help with something? Slide into our messages!", // Text of greeting message
+            greeting_message: "Hey 👋 What’s up? Need help with something? Slide into our dm! We will be happy to help!", // Text of greeting message
             greeting_messengers: true, // Greeting messengers may be 'true' or 'false'
-            greeting_cookie: 86400, // Greeting cookie lifetime
+            greeting_cookie: 21600, // Greeting cookie lifetime
             greeting_message_delay: 10, // Greeting message delay
-            greeting_agent_name: "Tami", // Greeting agent name
+            greeting_agent_name: "Cove", // Greeting agent name
             greeting_agent_position: "Support", // Greeting agent position
             greeting_start_chat_with: "Message us on", // Greeting start chat with text
             greeting_style: "alternative", // Greeting style may be 'classic' or 'alternative'

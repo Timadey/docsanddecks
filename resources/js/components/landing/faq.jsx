@@ -1,26 +1,47 @@
 
 import React, { useState } from 'react';
+import { usePage } from '@inertiajs/react';
 
 const Faq = () => {
     const [faq, setFaq] = useState([
         {
-            question: 'How to create an account?',
-            answer: 'Amet minim mollit non deserunt ullamco est sit <a href="#" title="" class="text-blue-600 transition-all duration-200 hover:underline">aliqua dolor</a> do amet sint. Velit officia consequat duis enim velit mollit.',
+            question: 'When does the training start?',
+            answer: 'Kicking off with an introductory session on the 21st of July.',
             open: false
         },
         {
-            question: 'How can I make payment using Paypal?',
-            answer: 'Amet minim mollit non deserunt ullamco est sit <a href="#" title="" class="text-blue-600 transition-all duration-200 hover:underline">aliqua dolor</a> do amet sint. Velit officia consequat duis enim velit mollit.',
+            question: 'What is the mode of training?',
+            answer: 'The training is fully virtual, conducted in a closed Telegram group with assignments to solidify your learning.',
             open: false
         },
         {
-            question: 'Can I cancel my plan?',
-            answer: 'Amet minim mollit non deserunt ullamco est sit <a href="#" title="" class="text-blue-600 transition-all duration-200 hover:underline">aliqua dolor</a> do amet sint. Velit officia consequat duis enim velit mollit.',
+            question: 'What if I miss a session?',
+            answer: 'If you miss a session, you can catch up using shared session materials and assignments in the Telegram group. Classes will also be recorded, but you may lose marks for attendance, which is a major requirement in this training. You are expected to show up for what you have committed to. Support is available if you need further clarification.',
             open: false
         },
         {
-            question: 'How can I reach to support?',
-            answer: 'Amet minim mollit non deserunt ullamco est sit <a href="#" title="" class="text-blue-600 transition-all duration-200 hover:underline">aliqua dolor</a> do amet sint. Velit officia consequat duis enim velit mollit.',
+            question: 'Is the training self-paced? Are deadline extensions possible?',
+            answer: 'The training is not self-paced, as accountability helps participants stay consistent. However, tasks and assignments usually have a one-week submission window, with the possibility of an extension if needed.',
+            open: false
+        },
+        {
+            question: 'How long is the training and how often are the sessions?',
+            answer: 'The training lasts for 6 weeks, with sessions held two times a week.',
+            open: false
+        },
+        {
+            question: 'What is the cost of the training?',
+            answer: 'The training costs NGN 7,000, but we are running a campaign that gives a 20% discount if you follow our social media.',
+            open: false
+        },
+        {
+            question: 'What payment options are available?',
+            answer: 'We offer a variety of payment options depending on your location. Everyone can pay with card. Nigerians can pay with Opay and bank transfer. Ghana, Zambia, Kenya and other African countries can pay with card and mobile money. You can also pay with ApplePay and Google Pay. Go to the payment page and make your payment. The available payment options will be shown to you',
+            open: false
+        },
+        {
+            question: 'Do you offer other trainings?',
+            answer: 'Yes, we do. We also offer trainings in data analysis and web development. For more details, please contact support',
             open: false
         }
     ]);
@@ -42,7 +63,7 @@ const Faq = () => {
             <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
                 <div className="max-w-2xl mx-auto text-center">
                     <h2 className="text-3xl font-bold leading-tight text-blue-900 sm:text-4xl lg:text-5xl">Frequently Asked Questions</h2>
-                    <p className="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do</p>
+                    <p className="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">Find answers to common questions about our training program below.</p>
                 </div>
 
                 <div className="max-w-3xl mx-auto mt-8 space-y-4 md:mt-16">
@@ -63,7 +84,7 @@ const Faq = () => {
 
                 <p className="text-center text-blue-700 text-base mt-9">
                     Didn’t find the answer you are looking for?{' '}
-                    <a href="#" title="" className="font-medium text-blue-600 transition-all duration-200 hover:text-blue-800 focus:text-blue-800 hover:underline">
+                    <a href={`https://api.whatsapp.com/send/?phone=${usePage().props.support_number}&text=Hello%2C+I+have+a+few+questions...&type=phone_number&app_absent=0`} title="" className="font-medium text-blue-600 transition-all duration-200 hover:text-blue-800 focus:text-blue-800 hover:underline">
                         Contact our support
                     </a>
                 </p>

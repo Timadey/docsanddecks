@@ -3,7 +3,7 @@ import LandingLayout from '../layouts/landing-layout.jsx';
 
 export default function RegisterDlb() {
     return (
-        <LandingLayout title={"DLB Bootcamp"}haveHeader={true}>
+        <LandingLayout title={"DLB Bootcamp"} haveHeader={true}>
             <DLBRegisterForm />
         </LandingLayout>
     );

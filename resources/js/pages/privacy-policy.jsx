@@ -23,6 +23,9 @@ export default function PrivacyPolicy() {
                             <strong>Usage Data:</strong> We collect information about how you use our site, such as pages visited and actions taken, to improve your experience.
                         </li>
                         <li>
+                            <strong>Location Data:</strong> We may collect your location to streamline your experience, such as customizing payment options and content based on your region.
+                        </li>
+                        <li>
                             <strong>Cookies:</strong> We use cookies to remember your preferences and enhance your visit. You can manage cookies in your browser settings.
                         </li>
                     </ul>

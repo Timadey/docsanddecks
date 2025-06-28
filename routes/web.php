@@ -1,5 +1,8 @@
 <?php
 
+use App\Modules\DLBRegistration\DLBRegistrationController;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,8 +27,15 @@ Route::get('/', function () {
 //})->name('testmail');
 
 Route::get('register-dlb', function () {
-    return Inertia::render('register-dlb');
+    return Inertia::render('register-dlb', [
+        'pricing' => [
+            'base_discounted' => 5600,
+            'base_original' => 7000,
+            'base_currency' => 'NGN',
+        ],
+    ]);
 })->name('register-dlb');
+
 
 Route::get('payment', function () {
     return Inertia::render('payment');
@@ -39,6 +49,28 @@ Route::get('privacy-policy', function () {
     return Inertia::render('privacy-policy');
 })->name('privacy-policy');
 
+Route::prefix('payment')->group(function () {
+    Route::post('initialize-rave', [DLBRegistrationController::class, 'initializeRave'])->name('payment.rave');
+    Route::get('confirm-rave', [DLBRegistrationController::class, 'confirmRave'])->name('payment.confirm-rave');
+});
+
+Route::get('exchange-rate', function () {
+    $cacheKey = 'exchange_rate_ngn';
+    $cached = Cache::get($cacheKey);
+
+    if ($cached) {
+        return response()->json($cached);
+    }
+
+    $response = Http::get('https://v6.exchangerate-api.com/v6/b708622bd3a2c99942c4228f/latest/NGN');
+    if ($response->successful()) {
+        $data = $response->json();
+        Cache::put($cacheKey, $data, now()->addHours(6));
+        return response()->json($data);
+    }
+
+    return response()->json(['error' => 'Unable to fetch rates'], 500);
+})->name('exchange-rate');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {

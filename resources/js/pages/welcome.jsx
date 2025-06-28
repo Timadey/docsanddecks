@@ -13,6 +13,7 @@ import LandingLayout from '../layouts/landing-layout.jsx';
 import React from 'react';
 import { Cookie } from 'lucide-react';
 import { Link } from '@inertiajs/react';
+import Faq from '../components/landing/faq.jsx';
 
 export default function Welcome() {
     const [showCookieConsent, setShowCookieConsent] = React.useState(
@@ -33,7 +34,7 @@ export default function Welcome() {
             <WhyUs />
             <Testimonials />
             <OurNumbers />
-            {/*<Faq />*/}
+            <Faq />
             <CallToAction />
             <Footer />
 

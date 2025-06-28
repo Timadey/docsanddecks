@@ -3,6 +3,7 @@ import PersonalForm from './steps/personal.jsx';
 import BackgroundForm from './steps/background.jsx';
 import Motivation from './steps/motivation.jsx';
 import { useForm } from '@inertiajs/react';
+import dndCurved from "@/assets/images/dnd-curved.png";
 
 export default function RegisterStepForm() {
     const deadline = new Date('2025-07-21T00:00:00');
@@ -197,7 +198,7 @@ export default function RegisterStepForm() {
                 </div>
 
                 {/* Footer Countdown */}
-                <p className="mt-6 text-base text-blue-900 max-w-md mx-auto lg:mx-0">
+                <p className="mt-6 text-base text-blue-900 max-w-md mx-auto lg:mx-0 lg:mb-6">
                     It takes less than 2 minutes to register.{' '}
                     <span className="font-bold">
                         Next Cohort starts in {days} days and {hours} hours
@@ -214,11 +215,7 @@ export default function RegisterStepForm() {
                 />
             </div>
             <div className="hidden lg:block absolute right-0 z-10 -bottom-16 lg:top-24 lg:-left-20 pointer-events-none">
-                <img
-                    className="w-32 h-32 md:w-40 md:h-40"
-                    src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/3/circular-text.png"
-                    alt=""
-                />
+                <img className="ml-4 w-36 h-28 md:w-45 md:h-40" src={dndCurved} alt="" />
             </div>
         </>
     );

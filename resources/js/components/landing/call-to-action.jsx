@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, Clock } from 'lucide-react';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import ipadeola from '../../assets/images/ipadeola-cropped.webp';
 
 const CallToAction = () => {
@@ -60,7 +60,7 @@ const CallToAction = () => {
                             </Link>
 
                             <a
-                                href="https://api.whatsapp.com/send/?phone=2347065380726&text=Hello%2C+I+have+a+few+questions...&type=phone_number&app_absent=0"
+                                href={`https://api.whatsapp.com/send/?phone=${usePage().props.support_number}&text=Hello%2C+I+have+a+few+questions...&type=phone_number&app_absent=0`}
                                 className="flex items-center justify-center w-full px-6 py-4 mt-4 text-lg font-bold text-blue-700 bg-white border-2 border-blue-500 rounded-lg hover:bg-blue-50 hover:text-blue-900 transition duration-200"
                             >
                                 💬 Talk to us

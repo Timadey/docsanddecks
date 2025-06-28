@@ -3,7 +3,7 @@
 namespace App\Modules\DLBRegistration;
 
 use App\Models\User;
-use App\Modules\payment\Payment;
+use App\Modules\Payment\Payment;
 use App\Modules\SquadMember\SquadMember;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;

@@ -40,9 +40,14 @@ return [
         's_key' => env('PAYSTACK_SECRET_KEY'),
     ],
 
+    'rave' => [
+        's_key' => env('FLUTTERWAVE_SECRET_KEY', '')
+    ],
+
     'dnd' => [
         'api_url' => env('DND_API_URL', ''),
         'support_number' => env('SUPPORT_NUMBER', ''),
+        'exchange_api' => env('EXCHANGE_RATE_API', ''),
     ]
 
 ];
