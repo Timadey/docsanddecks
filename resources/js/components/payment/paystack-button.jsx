@@ -25,6 +25,7 @@ const PaystackButton = ({ amount, user, onSuccess }) => {
                 console.log("onLoad: ", response);
             },
             onCancel: () => {
+                setLoading(false);
                 console.log("onCancel");
             },
             onError: (error) => {
