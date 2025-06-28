@@ -170,6 +170,14 @@ class DLBRegistrationController extends Controller
                     'message' => 'You can\'t refer yourself, lol, share the code with your friends instead.'
                 ]);
             }
+
+            // Check and update user's registration referral if empty
+            $user = User::where('email', $request->input('email'))->first();
+            if ($user && $user->dlbRegistration && empty($user->dlbRegistration->referral)) {
+                $user->dlbRegistration->referral = $referral->referral_code;
+                $user->dlbRegistration->save();
+            }
+
             return response()->json([
                 'valid' => true,
                 'referrer' => $referral->user->firstname,
