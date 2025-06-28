@@ -78,7 +78,6 @@ const PaymentDetail = ({ userName, userPaying, referrer, paid }) => {
         setLoading(true);
         setError("");
         try {
-            await new Promise((resolve) => setTimeout(resolve, 600));
             const res = await fetch("/api/payment/validate-referral", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": csrfToken },

@@ -27,7 +27,6 @@ const FetchUserPaying = ({ setUserName, setEmailSubmitted, setReferral, setUserP
         setError('');
         try {
             // Small delay to show loading animation
-            await new Promise((resolve) => setTimeout(resolve, 600));
             const res = await fetch('/api/payment/user-by-email', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
