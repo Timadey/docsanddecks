@@ -13,6 +13,8 @@ php artisan config:cache
 echo "Caching routes..."
 php artisan route:cache
 
+php artisan filament:optimize
+
 echo "Running migrations..."
 php artisan migrate --force
 chmod -R 775 database \
