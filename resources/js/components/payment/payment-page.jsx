@@ -157,36 +157,37 @@ const PaymentDetail = ({ userName, userPaying, referrer, paid }) => {
                             validateReferral(referral.code);
                         }}
                     >
-                        <label className="mb-1 text-sm font-semibold text-blue-700" htmlFor="referral">
-                            Have a referral code?
-                        </label>
-                        <div className="flex w-full gap-2">
-                            <input
-                                id="referral"
-                                type="text"
-                                className="flex-1 rounded-lg border-2 border-blue-200 bg-blue-50/50 px-3 py-2 font-medium text-blue-700 placeholder-blue-300 transition focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                                placeholder="Enter referral code"
-                                value={referral.code}
-                                onChange={(e) => setReferral({ ...referral, code: e.target.value })}
-                                disabled={referral.valid}
-                            />
-                            <button
-                                type="submit"
-                                className={`w-full cursor-pointer rounded-lg px-4 py-2 font-semibold shadow transition ${
-                                    loading ? 'cursor-not-allowed bg-blue-300 text-white' : 'bg-blue-700 text-white hover:bg-blue-800'
-                                }`}
-                                disabled={loading || referral.valid}
-                            >
-                                {loading ? (
-                                    <svg className="mr-2 inline h-4 w-4 animate-spin text-white" fill="none" viewBox="0 0 24 24">
-                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-                                    </svg>
-                                ) : (
-                                    'Apply'
-                                )}
-                            </button>
-                        </div>
+                        {/*The only thing they should be able to apply here is coupon code, referral code should be included in registration*/}
+                        {/*<label className="mb-1 text-sm font-semibold text-blue-700" htmlFor="referral">*/}
+                        {/*    Have a referral code?*/}
+                        {/*</label>*/}
+                        {/*<div className="flex w-full gap-2">*/}
+                        {/*    <input*/}
+                        {/*        id="referral"*/}
+                        {/*        type="text"*/}
+                        {/*        className="flex-1 rounded-lg border-2 border-blue-200 bg-blue-50/50 px-3 py-2 font-medium text-blue-700 placeholder-blue-300 transition focus:ring-2 focus:ring-blue-400 focus:outline-none"*/}
+                        {/*        placeholder="Enter referral code"*/}
+                        {/*        value={referral.code}*/}
+                        {/*        onChange={(e) => setReferral({ ...referral, code: e.target.value })}*/}
+                        {/*        disabled={referral.valid}*/}
+                        {/*    />*/}
+                        {/*    <button*/}
+                        {/*        type="submit"*/}
+                        {/*        className={`w-full cursor-pointer rounded-lg px-4 py-2 font-semibold shadow transition ${*/}
+                        {/*            loading ? 'cursor-not-allowed bg-blue-300 text-white' : 'bg-blue-700 text-white hover:bg-blue-800'*/}
+                        {/*        }`}*/}
+                        {/*        disabled={loading || referral.valid}*/}
+                        {/*    >*/}
+                        {/*        {loading ? (*/}
+                        {/*            <svg className="mr-2 inline h-4 w-4 animate-spin text-white" fill="none" viewBox="0 0 24 24">*/}
+                        {/*                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>*/}
+                        {/*                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>*/}
+                        {/*            </svg>*/}
+                        {/*        ) : (*/}
+                        {/*            'Apply'*/}
+                        {/*        )}*/}
+                        {/*    </button>*/}
+                        {/*</div>*/}
                         {error && referral.code && !referral.valid && <span className="mt-1 text-xs text-red-600">{error}</span>}
                     </form>
                 </div>
