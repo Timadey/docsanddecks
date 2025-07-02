@@ -16,6 +16,15 @@ php artisan route:cache
 echo "Optimising filament components"
 php artisan filament:optimize
 
+echo 'Caching icons...';
+php artisan icons:cache
+
+echo 'Caching Filament components...';
+php artisan filament:cache-components
+
+echo 'Running artisan optimize...';
+php artisan optimize
+
 echo "Running migrations..."
 php artisan migrate --force
 
