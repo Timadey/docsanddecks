@@ -4,7 +4,7 @@ import { usePage } from '@inertiajs/react';
 import useCurrencyConverter from '../../hooks/use-currency-converter.jsx';
 
 const DLBRegisterForm = () => {
-    const { pricing } = usePage().props;
+    const { pricing, referral } = usePage().props;
 
     const {
         currency: userCurrency,
@@ -84,7 +84,7 @@ const DLBRegisterForm = () => {
             </div>
             {/* Right: Step Form */}
             <div className="pointer-events-auto relative flex h-auto w-full flex-1 items-center justify-center px-6 py-10 sm:px-10 md:mt-24 lg:h-screen lg:w-7/12 lg:py-24">
-                <RegisterStepForm />
+                <RegisterStepForm referral={referral} />
             </div>
         </div>
     );

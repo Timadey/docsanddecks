@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-export default function Motivation({ formData, onChange, errors }) {
+export default function Motivation({ formData, onChange, errors, referral }) {
     const firstFieldRef = useRef(null);
     useEffect(() => {
         firstFieldRef.current?.focus(); // Auto-focus on the first field
@@ -60,17 +60,43 @@ export default function Motivation({ formData, onChange, errors }) {
                 <label htmlFor="referral" className="block text-blue-900 font-medium mb-2">
                     Enter your referral code
                 </label>
+                {referral && referral.is_valid && referral.referrer_name && (
+                    <div className="mb-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+                        <div className="flex items-center text-green-700">
+                            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                            <span className="text-sm font-medium">
+                                Referred by: <strong>{referral.referrer_name}</strong>
+                            </span>
+                        </div>
+                        <p className="text-xs text-green-600 mt-1">
+                            Your referral code has been automatically applied!
+                        </p>
+                    </div>
+                )}
                 <input
                     type="text"
                     id="referral"
                     name="referral"
-                    className="border-2 border-blue-200 rounded-lg px-3 py-2 w-full text-blue-700 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 transition bg-blue-50/50 placeholder-blue-300"
-                    placeholder="Enter your referral code (optional)"
+                    className={`border-2 rounded-lg px-3 py-2 w-full font-medium focus:outline-none transition ${
+                        referral && referral.is_valid
+                            ? 'border-green-300 bg-green-50 text-green-700 cursor-not-allowed'
+                            : 'border-blue-200 bg-blue-50/50 text-blue-700 focus:ring-2 focus:ring-blue-400 placeholder-blue-300'
+                    }`}
+                    placeholder={referral && referral.is_valid ? 'Referral code applied' : 'Enter your referral code (optional)'}
                     value={formData.referral || ''}
                     onChange={onChange}
+                    disabled={referral && referral.is_valid}
+                    readOnly={referral && referral.is_valid}
                 />
                 {errors?.referral && <div className="text-red-500 text-xs mt-1">{errors.referral}</div>}
-                <small className="text-sm font-bold text-blue-400">Get extra 5% OFF all trainings when you register with a referral code </small>
+                <small className="text-sm font-bold text-blue-400">
+                    {referral && referral.is_valid
+                        ? '✅ Referral code applied - You\'ll get extra 5% OFF!'
+                        : 'Get extra 5% OFF all trainings when you register with a referral code'
+                    }
+                </small>
             </div>
             <div className="mb-5">
                 <label htmlFor="will-commit" className="block text-blue-900 font-medium mb-2">

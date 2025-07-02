@@ -71,7 +71,20 @@ class DLBRegistrationController extends Controller
         logger()->info("User created or found", ['user' => $user->toArray()]);
 
         logger()->info("Creating DLB registration for user", ['user_id' => $user->id, 'validated' => $validated]);
-        $user->dlbRegistration()->create($validated);
+        
+        // Find squad member by referral code and set referred_by
+        $referredBy = null;
+        if (!empty($validated['referral'])) {
+            $squadMember = SquadMember::whereRaw('LOWER(referral_code) = ?', [strtolower($validated['referral'])])->first();
+            if ($squadMember) {
+                $referredBy = $squadMember->id;
+            }
+        }
+        
+        $registrationData = $validated;
+        $registrationData['referred_by'] = $referredBy;
+        
+        $user->dlbRegistration()->create($registrationData);
         $email = $user->email;
 
         try{
@@ -181,6 +194,7 @@ class DLBRegistrationController extends Controller
             $user = User::where('email', $request->input('email'))->first();
             if ($user && $user->dlbRegistration && empty($user->dlbRegistration->referral)) {
                 $user->dlbRegistration->referral = $referral->referral_code;
+                $user->dlbRegistration->referred_by = $referral->id;
                 $user->dlbRegistration->save();
             }
 

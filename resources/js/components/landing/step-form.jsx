@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PersonalForm from './steps/personal.jsx';
 import BackgroundForm from './steps/background.jsx';
 import Motivation from './steps/motivation.jsx';
 import { useForm } from '@inertiajs/react';
 import dndCurved from "@/assets/images/dnd-curved.png";
 
-export default function RegisterStepForm() {
+export default function RegisterStepForm({ referral }) {
     const deadline = new Date('2025-07-21T00:00:00');
     const [step, setStep] = useState(0);
     const [submitting, setSubmitting] = useState(false);
@@ -38,6 +38,13 @@ export default function RegisterStepForm() {
         will_commit: '',
         followed_socials: ''
     });
+
+    // Prefill referral code if provided in URL
+    useEffect(() => {
+        if (referral && referral.code && referral.is_valid) {
+            setData('referral', referral.code);
+        }
+    }, [referral]);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -87,7 +94,7 @@ export default function RegisterStepForm() {
             case 1:
                 return <BackgroundForm formData={data} onChange={handleChange} errors={errors} />;
             case 2:
-                return <Motivation formData={data} onChange={handleChange} errors={errors} />;
+                return <Motivation formData={data} onChange={handleChange} errors={errors} referral={referral} />;
             default:
                 return null;
         }

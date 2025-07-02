@@ -24,6 +24,7 @@ class DlbRegistration extends Model
         'motivation',
         'hear_source',
         'referral',
+        'referred_by',
         'will_commit',
     ];
 
@@ -34,7 +35,7 @@ class DlbRegistration extends Model
 
     public function referredBy()
     {
-        return $this->belongsTo(SquadMember::class, 'referral', 'referral_code');
+        return $this->belongsTo(SquadMember::class, 'referred_by');
     }
     public function payment()
     {

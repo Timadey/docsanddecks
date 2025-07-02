@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\DLBRegistration\DLBRegistrationController;
+use App\Modules\SquadMember\SquadMember;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -27,11 +28,32 @@ Route::get('/', function () {
 //})->name('testmail');
 
 Route::get('register-dlb', function () {
+    $refCode = request()->query('discount');
+    $isValidRef = false;
+    $referrerName = null;
+
+    // Validate the referral code if provided
+    if ($refCode) {
+        $squadMember = SquadMember::where('referral_code', $refCode)
+            ->with('user')
+            ->first();
+
+        if ($squadMember) {
+            $isValidRef = true;
+            $referrerName = $squadMember->user->firstname . ' ' . $squadMember->user->lastname;
+        }
+    }
+
     return Inertia::render('register-dlb', [
         'pricing' => [
             'base_discounted' => 5600,
             'base_original' => 7000,
             'base_currency' => 'NGN',
+        ],
+        'referral' => [
+            'code' => $refCode,
+            'is_valid' => $isValidRef,
+            'referrer_name' => $referrerName,
         ],
     ]);
 })->name('register-dlb');

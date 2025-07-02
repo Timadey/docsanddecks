@@ -4,6 +4,7 @@
 namespace App\Filament\Pages\Squad;
 
 use App\Filament\Widgets\MyReferralStats;
+use App\Filament\Widgets\ReferralInfoWidget;
 use App\Modules\DLBRegistration\DlbRegistration;
 //use Filament\Pages\Page;
 use App\Modules\SquadMember\SquadMember;
@@ -12,6 +13,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use Filament\Widgets\Widget;
 
 class Dashboard extends \Filament\Pages\Dashboard
 {
@@ -21,6 +23,14 @@ class Dashboard extends \Filament\Pages\Dashboard
 
     protected static ?string $title = 'Squad Dashboard';
     protected static ?string $navigationGroup = 'Referrals';
+
+    public function getWidgets(): array
+    {
+        return [
+            MyReferralStats::class,
+            ReferralInfoWidget::class,
+        ];
+    }
 
     public function table(Table $table): Table
     {

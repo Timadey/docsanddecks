@@ -2,9 +2,7 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Pages\Squad\Dashboard;
-use App\Filament\Pages\Squad\EditSquadProfile;
-use App\Filament\Widgets\ReferralCodeWidget;
+use App\Http\Middleware\AdminPanelMiddleware;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -21,38 +19,31 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-class DndsquadPanelProvider extends PanelProvider
+class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
-            ->id('squad-member')
-            ->path('squad-member')
+            ->id('admin')
+            ->path('binoculars')
             ->login()
-            //->registration()
-            //->passwordReset()
-            //->emailVerification()
-            //->profile()
             ->colors([
-                'primary' => Color::Blue,
-                'secondary' => Color::Teal,
+                'primary' => Color::Red,
+                'secondary' => Color::Orange,
             ])
             ->navigationGroups([
-                'Referrals',
-                'Profile',
+                'User Management',
+                'Registration Management',
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
+            ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
             ->pages([
-                //Pages\Dashboard::class,
-                Dashboard::class,
-                EditSquadProfile::class,
+                Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                //Widgets\FilamentInfoWidget::class,
+                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -67,6 +58,8 @@ class DndsquadPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])->spa();
+                AdminPanelMiddleware::class,
+            ])
+            ->spa();
     }
 }

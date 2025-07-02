@@ -3,6 +3,7 @@
 namespace App\Modules\SquadMember;
 
 use App\Models\User;
+use App\Modules\DLBRegistration\DlbRegistration;
 use Illuminate\Database\Eloquent\Model;
 
 class SquadMember extends Model
@@ -20,6 +21,6 @@ class SquadMember extends Model
 
     public function dlbRegistrations()
     {
-        return $this->hasMany(DlbRegistration::class, 'referral', 'referral_code');
+        return $this->hasMany(DlbRegistration::class, 'referred_by');
     }
 }
