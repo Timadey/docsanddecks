@@ -13,7 +13,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Filament\Widgets\Widget;
+use Filament\Widgets;
 
 class Dashboard extends \Filament\Pages\Dashboard
 {
@@ -27,6 +27,7 @@ class Dashboard extends \Filament\Pages\Dashboard
     public function getWidgets(): array
     {
         return [
+            Widgets\AccountWidget::class,
             MyReferralStats::class,
             ReferralInfoWidget::class,
         ];

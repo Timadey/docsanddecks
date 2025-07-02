@@ -19,8 +19,9 @@ class AdminPanelMiddleware
         $user = Auth::user();
 
         // Check if user is authenticated and has the specific email
-        if (!$user || $user->email !== 'dlktimothy@gmail.com') {
-            abort(403, 'Access denied. You do not have permission to access the admin panel.');
+        $adminEmails = explode(',', env('ADMIN_EMAILS', ''));
+        if (!$user || !in_array($user->email, $adminEmails)) {
+            abort(403, 'Access denied. You do not have permission to access the binoculars.');
         }
 
         return $next($request);

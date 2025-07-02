@@ -77,10 +77,16 @@ class User extends Authenticatable implements FilamentUser, HasName
 
     public function canAccessPanel(Panel $panel): bool
     {
-        if ($panel->getId() === 'squad-member') {
-            return $this->squadMember()->exists();
+        $adminEmails = explode(',', env('ADMIN_EMAILS', ''));
+        if($panel->getId() === 'admin' && (in_array($this->email, $adminEmails)))
+        {
+           return true;
         }
 
-        return true; // Allow access to other panels (like admin) if needed
+        if ($panel->getId() === 'squad-member') {
+            logger("squad member exists", [$this->squadMember()->exists()]);
+            return (bool) $this->squadMember()->exists();
+        }
+        return false;
     }
 }
