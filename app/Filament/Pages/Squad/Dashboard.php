@@ -6,6 +6,11 @@ namespace App\Filament\Pages\Squad;
 use App\Filament\Widgets\MyReferralStats;
 use App\Modules\DLBRegistration\DlbRegistration;
 //use Filament\Pages\Page;
+use App\Modules\SquadMember\SquadMember;
+use Filament\Resources\Components\Tab;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Table;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class Dashboard extends \Filament\Pages\Dashboard
@@ -16,5 +21,33 @@ class Dashboard extends \Filament\Pages\Dashboard
 
     protected static ?string $title = 'Squad Dashboard';
     protected static ?string $navigationGroup = 'Referrals';
+
+    public function table(Table $table): Table
+    {
+        return $table
+            ->query(
+                SquadMember::query()
+                    ->withCount('dlbRegistrations') // as referrals
+                    ->with(['dlbRegistrations.payments']) // for manual payments count
+            )
+            ->columns([
+                TextColumn::make('user.firstname')
+                    ->label('Name')
+                    ->sortable()
+                    ->searchable(),
+
+                TextColumn::make('dlb_registrations_count')
+                    ->label('Referrals')
+                    ->sortable(),
+
+                TextColumn::make('payments_count')
+                    ->label('Payments')
+                    ->getStateUsing(function ($record) {
+                        return $record->dlbRegistrations->flatMap->payments->count();
+                    }),
+            ])
+            ->defaultSort('dlb_registrations_count', 'desc')
+            ->paginated(false);
+    }
 
 }

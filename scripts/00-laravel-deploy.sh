@@ -12,8 +12,12 @@ php artisan config:cache
 echo "Caching routes..."
 php artisan route:cache
 
+echo "Optimising filament components"
+php artisan filament:optimize
+
 echo "Running migrations..."
 php artisan migrate --force
+
 chmod -R 775 database \
  && chown -R www-data:www-data database \
  && chown www-data:www-data database/database.sqlite \

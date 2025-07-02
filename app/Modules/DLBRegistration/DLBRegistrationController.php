@@ -100,6 +100,12 @@ class DLBRegistrationController extends Controller
         $location = Http::get("https://ipapi.co/{$ip}/json/")->json();
         if (isset($location['error']) || !isset($location['country']) || !isset($location['currency'])) {
             logger()->warning("Could not fetch location data for IP: {$ip}", ['response' => $location]);
+            $user->profile()->updateOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'location' => json_encode(['ip' => $ip ]),
+                ]
+            );
             return $user;
         }
         logger()->info("Fetched location data", ['location' => $location]);

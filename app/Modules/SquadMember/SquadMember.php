@@ -17,4 +17,9 @@ class SquadMember extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function dlbRegistrations()
+    {
+        return $this->hasMany(DlbRegistration::class, 'referral', 'referral_code');
+    }
 }
