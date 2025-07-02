@@ -34,7 +34,7 @@ Route::get('register-dlb', function () {
 
     // Validate the referral code if provided
     if ($refCode) {
-        $squadMember = SquadMember::where('referral_code', $refCode)
+        $squadMember = SquadMember::whereRaw('LOWER(referral_code) = ?', [strtolower($refCode)])
             ->with('user')
             ->first();
 
