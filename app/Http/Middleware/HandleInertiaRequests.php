@@ -62,7 +62,7 @@ class HandleInertiaRequests extends Middleware
                 'location' => $request->url(),
             ],
             'csrf_token' => csrf_token(),
-            'p_key' => env('PAYSTACK_PUBLIC_KEY'),
+            'p_key' => config('services.paystack.p_key'),
             'support_number' => config('services.dnd.support_number')
         ];
     }

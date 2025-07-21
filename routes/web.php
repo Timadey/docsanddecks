@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\DataDecode\DataDecodeController;
 use App\Modules\DLBRegistration\DLBRegistrationController;
 use App\Modules\SquadMember\SquadMember;
 use Illuminate\Support\Facades\Cache;
@@ -46,7 +47,7 @@ Route::get('register-dlb', function () {
 
     return Inertia::render('register-dlb', [
         'pricing' => [
-            'base_discounted' => 5600,
+            'base_discounted' => 7000,
             'base_original' => 7000,
             'base_currency' => 'NGN',
         ],
@@ -75,6 +76,13 @@ Route::prefix('payment')->group(function () {
     Route::post('initialize-rave', [DLBRegistrationController::class, 'initializeRave'])->name('payment.rave');
     Route::get('confirm-rave', [DLBRegistrationController::class, 'confirmRave'])->name('payment.confirm-rave');
 });
+
+
+Route::get('register-dd', function () {
+    return Inertia::render('register-data-decode');
+})->name('register-data-decode');
+
+Route::post('/data-decode/register', [DataDecodeController::class, 'registerDataDecode']);
 
 Route::get('exchange-rate', function () {
     $cacheKey = 'exchange_rate_ngn';

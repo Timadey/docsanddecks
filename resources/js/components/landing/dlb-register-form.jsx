@@ -28,7 +28,7 @@ const DLBRegisterForm = () => {
     });
 
     return (
-        <div className="flex flex-col overflow-hidden bg-white lg:min-h-screen lg:flex-row lg:items-stretch">
+        <div className="flex flex-col overflow-hidden bg-gradient-to-b from-white via-white to-blue-50 lg:min-h-screen lg:flex-row lg:items-stretch">
             {/* Left: Image */} {/* Left: Image */}
             <div className="pointer-events-none relative h-150 w-full flex-shrink-0 overflow-hidden sm:h-96 lg:sticky lg:top-0 lg:order-1 lg:h-auto lg:w-5/12">
                 <div className="absolute inset-0">

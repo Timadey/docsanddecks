@@ -193,40 +193,40 @@ const PaymentDetail = ({ userName, userPaying, referrer, paid }) => {
                 </div>
             )}
 
-            <div className="mb-8 w-full">
-                <p className="mb-4 text-center text-sm text-blue-700">
-                    <span className="font-semibold">Optional:</span> Get extra <span className="font-bold text-green-700">20% discount</span> if you follow us on social media:
-                </p>
-                <div className="mb-4 flex justify-center gap-2">
-                    <a href="https://x.com/docsdecks" target="_blank" rel="noopener noreferrer">
-                        <img className="size-6" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/X_icon.svg" alt="x icon" />
-                    </a>
-                    <a href="https://linkedin.com/company/docsdecks" target="_blank" rel="noopener noreferrer">
-                        <img className="size-6" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="linkedin icon" />
-                    </a>
-                </div>
-                <div className="flex items-center justify-center gap-4">
-                    <button
-                        className={`cursor-pointer rounded-lg border-2 px-6 py-2 font-semibold shadow transition ${
-                            hasDiscount ? 'border-green-700 bg-green-600 text-white' : 'border-blue-700 bg-white text-blue-700 hover:bg-blue-50'
-                        }`}
-                        onClick={() => setHasDiscount(true)}
-                    >
-                        Yes, I follow
-                    </button>
-                    {hasDiscount && (
-                        <button
-                            className="rounded-lg border-2 border-red-700 bg-white px-6 py-2 font-semibold text-red-700 shadow transition hover:bg-red-50"
-                            onClick={() => setHasDiscount(false)}
-                        >
-                            No, I don't
-                        </button>
-                    )}
-                </div>
-                <p className="mt-2 text-center text-xs text-blue-400">
-                    We will verify your social media follow before confirming your discount 👀.
-                </p>
-            </div>
+            {/*<div className="mb-8 w-full">*/}
+            {/*    <p className="mb-4 text-center text-sm text-blue-700">*/}
+            {/*        <span className="font-semibold">Optional:</span> Get extra <span className="font-bold text-green-700">20% discount</span> if you follow us on social media:*/}
+            {/*    </p>*/}
+            {/*    <div className="mb-4 flex justify-center gap-2">*/}
+            {/*        <a href="https://x.com/docsdecks" target="_blank" rel="noopener noreferrer">*/}
+            {/*            <img className="size-6" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/X_icon.svg" alt="x icon" />*/}
+            {/*        </a>*/}
+            {/*        <a href="https://linkedin.com/company/docsdecks" target="_blank" rel="noopener noreferrer">*/}
+            {/*            <img className="size-6" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="linkedin icon" />*/}
+            {/*        </a>*/}
+            {/*    </div>*/}
+            {/*    <div className="flex items-center justify-center gap-4">*/}
+            {/*        <button*/}
+            {/*            className={`cursor-pointer rounded-lg border-2 px-6 py-2 font-semibold shadow transition ${*/}
+            {/*                hasDiscount ? 'border-green-700 bg-green-600 text-white' : 'border-blue-700 bg-white text-blue-700 hover:bg-blue-50'*/}
+            {/*            }`}*/}
+            {/*            onClick={() => setHasDiscount(true)}*/}
+            {/*        >*/}
+            {/*            Yes, I follow*/}
+            {/*        </button>*/}
+            {/*        {hasDiscount && (*/}
+            {/*            <button*/}
+            {/*                className="rounded-lg border-2 border-red-700 bg-white px-6 py-2 font-semibold text-red-700 shadow transition hover:bg-red-50"*/}
+            {/*                onClick={() => setHasDiscount(false)}*/}
+            {/*            >*/}
+            {/*                No, I don't*/}
+            {/*            </button>*/}
+            {/*        )}*/}
+            {/*    </div>*/}
+            {/*    <p className="mt-2 text-center text-xs text-blue-400">*/}
+            {/*        We will verify your social media follow before confirming your discount 👀.*/}
+            {/*    </p>*/}
+            {/*</div>*/}
 
             {userCurrency !== 'NGN' ? (
                 <FlutterwaveButton amount={convertedAmount} user={{ ...userPaying, currency: userCurrency }} />

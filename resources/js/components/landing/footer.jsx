@@ -1,5 +1,5 @@
 'use client';
-import { BookOpen, Linkedin, Palette, Square, Twitter } from 'lucide-react';
+import { BookOpen, Facebook, Linkedin, Twitter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from '@inertiajs/react';
 
@@ -15,9 +15,9 @@ export default function Footer() {
                         </a>
 
                         <div className="mt-2">
-                            <a href="https://x.com/compose/tweet?text=I%27ve%20been%20learning%20%23DocsandDecks%20and%20here%20are%20my%20thoughts">
+                            <a href="https://x.com/docsdecks">
                                 <Button variant="secondary" className="bg-blue-600 text-white hover:bg-blue-700">
-                                    Share Your Thoughts On
+                                    Follow us On
                                     <Twitter className="ml-1 h-4 w-4 text-blue-300" />
                                 </Button>
                             </a>
@@ -33,7 +33,7 @@ export default function Footer() {
                             <ul className="space-y-2">
                                 <li>
                                     <a
-                                        href="https://www.linkedin.com/in/arihantcodes"
+                                        href="https://www.linkedin.com/company/docsdecks"
                                         className="flex items-center gap-2 text-blue-700 hover:text-blue-900"
                                     >
                                         <Linkedin className="h-4 w-4 text-blue-600" />
@@ -41,8 +41,13 @@ export default function Footer() {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://x.com/arihantcodes" className="flex items-center gap-2 text-blue-700 hover:text-blue-900">
+                                    <a href="https://x.com/docsdecks" className="flex items-center gap-2 text-blue-700 hover:text-blue-900">
                                         <Twitter className="h-4 w-4 text-blue-600" />X
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/docsndecks" className="flex items-center gap-2 text-blue-700 hover:text-blue-900">
+                                        <Facebook className="h-4 w-4 text-blue-600" />Facebook
                                     </a>
                                 </li>
                             </ul>

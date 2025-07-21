@@ -3,12 +3,10 @@
 namespace App\Modules\DLBRegistration;
 
 use App\Http\Controllers\Controller;
-use App\Mail\PaymentSuccessMail;
 use App\Mail\RegistrationSuccessMail;
 use App\Models\User;
 use App\Modules\Payment\PaymentService;
 use App\Modules\SquadMember\SquadMember;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
@@ -71,7 +69,7 @@ class DLBRegistrationController extends Controller
         logger()->info("User created or found", ['user' => $user->toArray()]);
 
         logger()->info("Creating DLB registration for user", ['user_id' => $user->id, 'validated' => $validated]);
-        
+
         // Find squad member by referral code and set referred_by
         $referredBy = null;
         if (!empty($validated['referral'])) {
@@ -80,10 +78,10 @@ class DLBRegistrationController extends Controller
                 $referredBy = $squadMember->id;
             }
         }
-        
+
         $registrationData = $validated;
         $registrationData['referred_by'] = $referredBy;
-        
+
         $user->dlbRegistration()->create($registrationData);
         $email = $user->email;
 
@@ -303,5 +301,4 @@ class DLBRegistrationController extends Controller
         }
         return Inertia::render('payment-check', ['payment_success' => false]);
     }
-
 }

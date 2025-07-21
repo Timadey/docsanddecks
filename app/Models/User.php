@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Modules\DataDecode\DataDecodeRegistration;
 use App\Modules\SquadMember\SquadMember;
 use App\Shared\Enums\RoleEnum;
 use Filament\Models\Contracts\FilamentUser;
@@ -53,6 +54,11 @@ class User extends Authenticatable implements FilamentUser, HasName
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function dataDecodeRegistration()
+    {
+        return $this->hasOne(DataDecodeRegistration::class, 'user_id', 'id');
     }
 
     public function dlbRegistration()
