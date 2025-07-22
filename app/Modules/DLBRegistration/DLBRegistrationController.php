@@ -4,7 +4,9 @@ namespace App\Modules\DLBRegistration;
 
 use App\Http\Controllers\Controller;
 use App\Mail\RegistrationSuccessMail;
+use App\Mail\TelegramOnboardingMail;
 use App\Models\User;
+use App\Modules\Payment\Payment;
 use App\Modules\Payment\PaymentService;
 use App\Modules\SquadMember\SquadMember;
 use Illuminate\Http\Request;
@@ -300,5 +302,60 @@ class DLBRegistrationController extends Controller
             return Inertia::render('payment-check', ['payment_success' => true]);
         }
         return Inertia::render('payment-check', ['payment_success' => false]);
+    }
+
+    /**
+     * Send Telegram onboarding email to all users (with payment reference if paid, or payment link if not)
+     */
+    public function sendTelegramOnboardingEmails(Request $request)
+    {
+       // turn off gateway timeout
+       set_time_limit(0);
+        $users = \App\Models\User::with(['dlbRegistration.payment'])->get();
+        $count = 0;
+        foreach ($users as $user) {
+            $payment = optional($user->dlbRegistration)->payment;
+            if ($payment && $payment->status === 'success') {
+                \Mail::to($user->email)->send(new TelegramOnboardingMail($user, $payment));
+            } else {
+                \Mail::to($user->email)->send(new TelegramOnboardingMail($user, null));
+            }
+            $count++;
+            sleep(3);
+        }
+        return response()->json(['message' => "Sent onboarding emails to $count users."]);
+    }
+
+    /**
+     * Preview the Telegram onboarding email for a paid user
+     */
+    public function previewTelegramOnboardingEmailPaid()
+    {
+        $user = new \App\Models\User([
+            'firstname' => 'Jane',
+            'lastname' => 'Doe',
+            'email' => 'jane@example.com',
+        ]);
+        $payment = new Payment([
+            'reference' => 'PAY123456789',
+            'amount_paid' => 7000,
+            'payment_method' => 'card',
+            'paid_at' => now(),
+            'status' => 'success',
+        ]);
+        return new TelegramOnboardingMail($user, $payment);
+    }
+
+    /**
+     * Preview the Telegram onboarding email for an unpaid user
+     */
+    public function previewTelegramOnboardingEmailUnpaid()
+    {
+        $user = new \App\Models\User([
+            'firstname' => 'John',
+            'lastname' => 'Smith',
+            'email' => 'john@example.com',
+        ]);
+        return new TelegramOnboardingMail($user, null);
     }
 }

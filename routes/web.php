@@ -102,6 +102,10 @@ Route::get('exchange-rate', function () {
     return response()->json(['error' => 'Unable to fetch rates'], 500);
 })->name('exchange-rate');
 
+Route::get('/dlb/send-telegram-onboarding-emails', [DLBRegistrationController::class, 'sendTelegramOnboardingEmails'])->name('dlb.send-telegram-onboarding-emails');
+Route::get('/dlb/preview-telegram-onboarding-email/paid', [DLBRegistrationController::class, 'previewTelegramOnboardingEmailPaid'])->name('dlb.preview-telegram-onboarding-email.paid');
+Route::get('/dlb/preview-telegram-onboarding-email/unpaid', [DLBRegistrationController::class, 'previewTelegramOnboardingEmailUnpaid'])->name('dlb.preview-telegram-onboarding-email.unpaid');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
