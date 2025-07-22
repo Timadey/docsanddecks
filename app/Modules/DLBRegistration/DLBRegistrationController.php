@@ -309,9 +309,18 @@ class DLBRegistrationController extends Controller
      */
     public function sendTelegramOnboardingEmails(Request $request)
     {
-       // turn off gateway timeout
-       set_time_limit(0);
-        $users = \App\Models\User::with(['dlbRegistration.payment'])->get();
+        // turn off gateway timeout
+        set_time_limit(0);
+
+        $batchSize = 5; // You can adjust this as needed
+        $batchNumber = (int) $request->input('batch', 1);
+
+        $users = User::with(['dlbRegistration.payment'])
+            ->orderBy('id')
+            ->skip(($batchNumber - 1) * $batchSize)
+            ->take($batchSize)
+            ->get();
+
         $count = 0;
         foreach ($users as $user) {
             $payment = optional($user->dlbRegistration)->payment;
@@ -323,7 +332,13 @@ class DLBRegistrationController extends Controller
             $count++;
             sleep(3);
         }
-        return response()->json(['message' => "Sent onboarding emails to $count users."]);
+
+        return response()->json([
+            'message' => "Sent onboarding emails to $count users in batch $batchNumber.",
+            'batch' => $batchNumber,
+            'batch_size' => $batchSize,
+            'processed' => $count,
+        ]);
     }
 
     /**
