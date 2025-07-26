@@ -1,12 +1,15 @@
 import dndCurved from "@/assets/images/dnd-curved.png";
+import datadecodepng from "@/assets/images/datadecode-logo.png";
 import dataDrivenInsights from "../../assets/images/data-driven-insights.avif";
 import React, { useState } from 'react';
-import { useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 
 const DataDecodeRegisterForm = () => {
     const [submitting, setSubmitting] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const datadecode_group = usePage().props.datadecode_group;
+
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -34,14 +37,14 @@ const DataDecodeRegisterForm = () => {
         setErrorMessage('');
         setSuccessMessage('');
 
-        post(route('submit-register-dlb'), {
+        post(route('data-decode.register'), {
             onFinish: () => setSubmitting(false),
             onSuccess: () => {
                 reset();
                 alert(
                     '🎉 Registration successful! Please check your email for further instructions. Click OK to proceed to participant\'s group.'
                 );
-                window.location.href = 'https://chat.whatsapp.com/LMUwvp2pNMXHAOmwHXSDcn';
+                window.location.href = datadecode_group;
             },
             onError: (error) => {
                 setErrorMessage('😞 There was an error with your submission. Please check the form and try again. If the problem persists, kindly contact support.');
@@ -59,11 +62,12 @@ const DataDecodeRegisterForm = () => {
                         alt="right-image"
                     />
                 </div>
+
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-900 via-transparent to-transparent"></div>
-                <div className="absolute bottom-0 left-0 p-4 sm:p-6 lg:p-8">
+                <div className="absolute bottom-0 left-0 rounded-t-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-md sm:p-6 lg:p-8">
                     <div className="flex items-center">
                         <svg
-                            className="h-8 w-8 text-blue-600 sm:h-10 sm:w-10"
+                            className="h-8 w-8 text-yellow-400 sm:h-10 sm:w-10"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
@@ -74,21 +78,25 @@ const DataDecodeRegisterForm = () => {
                                 clipRule="evenodd"
                             />
                         </svg>
-                        <h2 className="ml-2.5 bg-gradient-to-r from-yellow-600 via-yellow-400 to-yellow-200 bg-clip-text text-4xl font-bold text-transparent drop-shadow-lg sm:text-6xl">
-                            {/*<span className="line-through text-blue-100 mr-2 text-2xl sm:text-4xl">*/}
-                            {/*    {formatter.format(converted.base)}*/}
-                            {/*</span>*/}
-                            {/*{formatter.format(converted.discounted.discounted)}*/}
+                        <h2 className="ml-2.5 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-100 bg-clip-text text-4xl font-bold text-transparent drop-shadow-lg sm:text-6xl">
                             FREE
                         </h2>
                     </div>
-                    <p className="mt-1.5 text-sm leading-relaxed text-white sm:text-lg">
-                        This discount is available to people who follow us on our socials! Like we said our pricing is chicken feed, we are here to
-                        help you learn and grow.
+                    <div className="absolute top-4 right-4 z-10 flex flex-col items-end">
+                        <img src={datadecodepng} alt="Data Decode Logo" className="mb-2 h-16 w-auto object-contain" />
+                        {/*<div className="bg-white/80 backdrop-blur-sm p-3 rounded-lg shadow-md max-w-xs">*/}
+                        {/*    <p className="text-sm font-medium text-blue-900">*/}
+                        {/*        Master data analysis skills for your final year project with our comprehensive 6-week training program.*/}
+                        {/*    </p>*/}
+                        {/*</div>*/}
+                    </div>
+                    <p className="mt-1.5 rounded-sm p-2 text-sm leading-relaxed text-white sm:text-lg">
+                        Join our 6-week comprehensive data analysis training designed specifically for final year students. Master essential skills
+                        like research methodology, questionnaire design, data cleaning, and statistical analysis using Excel and SPSS.
                     </p>
-                    <p className="mt-2 text-sm leading-relaxed text-white sm:text-lg">
-                        An email will be sent to you after registration and payment for confirmation. Don&#39;t forget to join the participant&#39;s
-                        group and also follow us on our social media platforms.
+                    <p className="mt-2 rounded-sm p-2 text-sm leading-relaxed text-white sm:text-lg">
+                        Start with 2 weeks of FREE foundational training covering research basics and data analysis introduction. Continue with 4
+                        weeks of in-depth practical training to become proficient in data analysis for your final year project and beyond.
                     </p>
                 </div>
             </div>
@@ -134,13 +142,13 @@ const DataDecodeRegisterForm = () => {
                             </div>
                         )}
 
-                        {/* Quote from a past student */}
-                        {/*<div className="mb-4 rounded border-l-4 border-blue-400 bg-blue-50 px-4 py-3 text-sm text-blue-900 italic">*/}
-                        {/*    “I remember when I filled the form to apply, we were asked to pick our proficiency in each of the digital skills. I picked*/}
-                        {/*    intermediate in MS word because I thought I knew all there is to it. Looking back now, I should have picked basic!”*/}
-                        {/*    <br />*/}
-                        {/*    <span className="mt-2 block font-semibold text-blue-700">— Oluwatayo Tomilayo, Alumni</span>*/}
-                        {/*</div>*/}
+                        <div className="mb-4 overflow-hidden rounded shadow-lg">
+                            <img
+                                src={datadecodepng}
+                                alt="DataDecode Logo"
+                                className="h-48 w-full bg-gradient-to-r from-blue-50 to-white object-contain"
+                            />
+                        </div>
                         {/* Main Form */}
                         <div className="mt-10 rounded-xl border-t border-gray-200 bg-white p-6 shadow-md sm:p-8">
                             <h2 className="mb-6 text-2xl font-semibold text-blue-900">
@@ -289,6 +297,21 @@ const DataDecodeRegisterForm = () => {
                                         />
                                         {errors?.department && <div className="mt-1 text-xs text-red-500">{errors.department}</div>}
                                     </div>
+                                    <div className="mb-5">
+                                        <label htmlFor="project_topic" className="mb-2 block font-medium text-blue-900">
+                                            Project Topic
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="project_topic"
+                                            name="project_topic"
+                                            className="w-full rounded-lg border-2 border-blue-200 bg-blue-50/50 px-3 py-2 font-medium text-blue-700 placeholder-blue-300 transition focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                                            placeholder="Enter your project topic"
+                                            value={data.project_topic || ''}
+                                            onChange={handleChange}
+                                        />
+                                        {errors?.project_topic && <div className="mt-1 text-xs text-red-500">{errors.project_topic}</div>}
+                                    </div>
                                     <div className="mb-6">
                                         <label htmlFor="phone" className="mb-2 block font-medium text-blue-900">
                                             Level
@@ -400,12 +423,11 @@ const DataDecodeRegisterForm = () => {
                                         </small>
                                     </div>
                                 </>
-                                { data.will_commit === '0' &&
+                                {data.will_commit === '0' && (
                                     <small className="text-sm text-red-400">
-                                        Unfortunately, this training is meant for those who are ready to commit to the training and their own
-                                        growth.
+                                        Unfortunately, this training is meant for those who are ready to commit to the training and their own growth.
                                     </small>
-                                }
+                                )}
                                 <div className="mt-8 flex justify-between">
                                     <button
                                         type="submit"

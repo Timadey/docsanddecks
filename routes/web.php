@@ -82,7 +82,18 @@ Route::get('register-dd', function () {
     return Inertia::render('register-data-decode');
 })->name('register-data-decode');
 
-Route::post('/data-decode/register', [DataDecodeController::class, 'registerDataDecode']);
+Route::post('/data-decode/register', [DataDecodeController::class, 'register'])->name('data-decode.register');
+
+Route::get('/data-decode/preview-email', function () {
+    return new App\Mail\DataDecodeRegistrationSuccessMail(
+        (object)[
+            'firstname' => 'John',
+            'lastname' => 'Doe',
+            'email' => 'john.doe@example.com'
+        ],
+        'https://chat.whatsapp.com/LMUwvp2pNMXHAOmwHXSDcn'
+    );
+})->name('data-decode.preview-email');
 
 Route::get('exchange-rate', function () {
     $cacheKey = 'exchange_rate_ngn';

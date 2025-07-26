@@ -63,7 +63,8 @@ class HandleInertiaRequests extends Middleware
             ],
             'csrf_token' => csrf_token(),
             'p_key' => config('services.paystack.p_key'),
-            'support_number' => config('services.dnd.support_number')
+            'support_number' => config('services.dnd.support_number'),
+            'datadecode_group' => config('services.dnd.datadecode_group'),
         ];
     }
 }

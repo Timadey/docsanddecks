@@ -48,6 +48,7 @@ return [
         'api_url' => env('DND_API_URL', ''),
         'support_number' => env('SUPPORT_NUMBER', ''),
         'exchange_api' => env('EXCHANGE_RATE_API', ''),
+        'datadecode_group' => env('DATADECODE_GROUP', ''),
     ]
 
 ];

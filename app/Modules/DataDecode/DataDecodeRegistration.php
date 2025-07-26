@@ -9,6 +9,8 @@ class DataDecodeRegistration extends Model
 {
     use HasFactory;
 
+    protected $table = 'data_decode_registration';
+
     protected $fillable = [
         'user_id',
         'institution',

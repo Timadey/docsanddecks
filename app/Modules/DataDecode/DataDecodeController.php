@@ -3,6 +3,7 @@
 namespace App\Modules\DataDecode;
 
 use App\Http\Controllers\Controller;
+use App\Mail\DataDecodeRegistrationSuccessMail;
 use App\Mail\RegistrationSuccessMail;
 use App\Models\User;
 use App\Modules\DataDecode\DataDecodeRegistration;
@@ -37,7 +38,7 @@ class DataDecodeController extends Controller
             'department'     => 'required|string|max:255',
             'institution'     => 'required|string|max:255',
             'level'          => 'required|string|in:100,200,300,400,500,600,700,PG',
-            'project_topic'   => 'required|string|max:255',
+            'project_topic'   => 'nullable|string|max:255',
         ]);
         logger()->info("New data decode user submit registration", ['data' => $request->all(), 'ip' => $request->ip()]);
 
@@ -64,7 +65,7 @@ class DataDecodeController extends Controller
         try{
             // Send registration success email
             logger()->info("Sending registration success email", ['to' => $email]);
-            Mail::to($email)->send(new RegistrationSuccessMail($user));
+            Mail::to($email)->send(new DataDecodeRegistrationSuccessMail($user));
         }catch (\Exception $e){
             logger()->error("Failed to send registration email", [$e->getMessage()]);
         }
