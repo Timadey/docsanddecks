@@ -30,7 +30,7 @@ class DataDecodeController extends Controller
             'lastname'       => 'required|string|max:255',
             'middlename'     => 'nullable|string|max:255',
             'gender'         => 'required|string|in:male,female',
-            'email'          => 'required|email:dns,rfc,spoof|max:255',
+            'email'          => 'required|email|max:255',
             'phone'          => 'required|string|max:18',
             'motivation'     => 'required|string|max:1000',
             'hear_source'    => 'required|string|max:100',
