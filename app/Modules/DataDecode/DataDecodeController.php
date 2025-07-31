@@ -65,7 +65,7 @@ class DataDecodeController extends Controller
         try{
             // Send registration success email
             logger()->info("Sending registration success email", ['to' => $email]);
-            Mail::to($email)->send(new DataDecodeRegistrationSuccessMail($user));
+            Mail::mailer('datadecode')->to($email)->send(new DataDecodeRegistrationSuccessMail($user));
         }catch (\Exception $e){
             logger()->error("Failed to send registration email", [$e->getMessage()]);
         }

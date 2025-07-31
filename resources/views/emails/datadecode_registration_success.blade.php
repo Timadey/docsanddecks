@@ -87,7 +87,7 @@
                 <tr>
                     <td class="footer-padding" style="background-color: #f9fafb; padding: 28px 20px; text-align: center; font-size: 14px; color: #94a3b8; border-top: 1px solid #e2e8f0;">
                         &copy; {{ date('Y') }} <strong><a style="color: #3b82f6; text-decoration: underline;" href="https://www.docsanddecks.com">DataDecode</a></strong>. All rights reserved.<br>
-                        Need help? <a href="mailto:info@docsanddecks.com" style="color: #3b82f6; text-decoration: underline;">Contact Support</a>
+                        Need help? <a href="mailto:datadecodehub@gmail.com" style="color: #3b82f6; text-decoration: underline;">Contact Support</a>
                     </td>
                 </tr>
 
