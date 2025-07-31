@@ -5,6 +5,7 @@ namespace App\Mail;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -20,11 +21,11 @@ class DataDecodeRegistrationSuccessMail extends Mailable
     public string $paymentLink;
     public mixed $whatsappGroupLink;
 
-    public function __construct($user, $whatsappGroupLink="https://chat.whatsapp.com/LMUwvp2pNMXHAOmwHXSDcn")
+    public function __construct($user)
     {
         $this->user = $user;
         $this->paymentLink = route('payment', ['email' => $user->email]);
-        $this->whatsappGroupLink = $whatsappGroupLink;
+        $this->whatsappGroupLink = config('services.dnd.datadecode_group');
     }
 
     /**
@@ -33,6 +34,7 @@ class DataDecodeRegistrationSuccessMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: new Address(config('mail.mailers.datadecode.username'), config('mail.mailers.datadecode.mail_from_name') ),
             subject: 'Welcome to DataDecode!',
         );
     }

@@ -49,6 +49,19 @@ return [
             'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
         ],
 
+        'datadecode' => [
+            'transport' => 'smtp',
+            'host' => env('DECODE_MAIL_HOST'),
+            'port' => env('DECODE_MAIL_PORT'),
+            'encryption' => env('DECODE_MAIL_ENCRYPTION', 'tls'),
+            'username' => env('DECODE_MAIL_USERNAME'),
+            'password' => env('DECODE_MAIL_PASSWORD'),
+            'timeout' => null,
+            'auth_mode' => null,
+            'mail_from' => env('DECODE_MAIL_FROM_ADDRESS'),
+            'mail_from_name' => env('DECODE_MAIL_FROM_NAME'),
+        ],
+
         'ses' => [
             'transport' => 'ses',
         ],
