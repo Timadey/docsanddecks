@@ -9,6 +9,9 @@ ENV PHP_ERRORS_STDERR 1
 ENV RUN_SCRIPTS 1
 ENV REAL_IP_HEADER 1
 
+# Expose HTTP port
+EXPOSE 80
+
 # Laravel config
 ENV APP_ENV production
 ENV APP_DEBUG false
