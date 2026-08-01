@@ -38,7 +38,7 @@ const Hero = () => {
                                 }}
                                 className="max-w-xl mx-auto mt-8 bg-white lg:mx-0 sm:bg-transparent lg:mt-12 rounded-xl"
                             >
-                                <div className="p-4 sm:p-2 sm:bg-white sm:border-2 sm:border-transparent sm:rounded-full sm:focus-within:border-blue-600 sm:focus-within:ring-1 sm:focus-within:ring[...]
+                                <div className="p-4 sm:p-2 sm:bg-white sm:border-2 sm:border-transparent sm:rounded-full sm:focus-within:border-blue-600 sm:focus-within:ring-1 sm:focus-within:ring-blue-600">
                                     <div className="flex flex-col items-start sm:flex-row">
                                         <div className="flex-1 w-full min-w-0">
                                             <div className="relative text-blue-400 focus-within:text-blue-600">
@@ -48,13 +48,13 @@ const Hero = () => {
                                                     name="email"
                                                     id="email"
                                                     placeholder="Enter email to get started"
-                                                    className="block w-full px-4 py-4 text-base text-center text-blue-900 placeholder-blue-400 transition-all duration-200 border-transparent rounde[...]
+                                                    className="block w-full px-4 py-4 text-base text-center text-blue-900 placeholder-blue-400 transition-all duration-200 border-transparent rounded-full focus:border-transparent focus:outline-none sm:text-left"
                                                     required=""
                                                 />
                                             </div>
                                         </div>
 
-                                        <button type="submit" className="inline-flex items-center justify-center w-full px-4 py-4 mt-4 font-semibold text-white transition-all duration-200 bg-blue-[...]
+                                        <button type="submit" className="inline-flex items-center justify-center w-full px-4 py-4 mt-4 font-semibold text-white transition-all duration-200 bg-blue-600 rounded-full sm:mt-0 sm:w-auto hover:bg-blue-700 focus:bg-blue-700">
                                             Join Next Cohort
                                         </button>
                                     </div>
@@ -98,7 +98,7 @@ const Hero = () => {
                             <div className="p-4 sm:p-6 lg:p-8">
                                 <div className="flex items-center">
                                     <svg className="w-10 h-10 text-blue-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="even[...]
+                                        <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
                                     </svg>
                                     <h2 className="font-bold text-white text-7xl ml-2.5">583</h2>
                                 </div>
